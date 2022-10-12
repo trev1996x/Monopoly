@@ -6,4 +6,4 @@
  *
  */
 module Monopoly {
-}
+};s
