@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author trevorleamon
- *
- */
-module Monopoly {
-}
