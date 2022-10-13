@@ -12,6 +12,11 @@ package edu.ilstu;
  */
 
 public class Main {
+    /**
+     * Application entry point
+     * @param args Command line arguments
+     * @throws Exception Catch-All
+     */
     public static void main(String[] args) throws Exception {
         @SuppressWarnings("unused")
         MainWindow window = new MainWindow("ISU Monopoly", 800, 600);
