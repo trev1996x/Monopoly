@@ -1,24 +1,16 @@
-/**
- * ULID: tmqualt, (Enter ULID), (Enter ULID)
- * Date Created: 12 October 2022
- */
 package edu.ilstu;
-/**
- * @author Ty Qualters
- * @author Trevor Leamon
- * @author Joel Fangu
- * 
- * The application entry point for the ISU Monopoly Game
- */
+
+import edu.ilstu.monopoly.Game;
 
 public class Main {
-    /**
-     * Application entry point
-     * @param args Command line arguments
-     * @throws Exception Catch-All
-     */
-    public static void main(String[] args) throws Exception {
-        @SuppressWarnings("unused")
-        MainWindow window = new MainWindow("ISU Monopoly", 800, 600);
-    }
+	/**
+	 * Application entry point
+	 * @param args CLI arguments
+	 * @throws Exception Generic exception
+	 */
+	public static void main(String[] args) throws Exception {
+		// Initialize the game (get out of the static trap)
+		@SuppressWarnings("unused")
+		Game game = new Game();
+	}
 }
