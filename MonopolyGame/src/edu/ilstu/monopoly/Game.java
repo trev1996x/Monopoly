@@ -87,7 +87,7 @@ public class Game {
 		
 		try {
 			this.run(mainWindow.getGamePanel());
-		} catch (InterruptedException ie) {
+		} catch (InterruptedException ie) { // "ie" stands for internet explorer btw
 			ie.printStackTrace();
 		}
 		
