@@ -18,23 +18,43 @@ import edu.ilstu.monopoly.items.*;
 // will require some annoying work, but that should be the worst of it
 
 class Renderer extends Thread {
-	@Override
-	public void run() {
-		Graphics2D g2 = this.frame.createGraphics();
-		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g2.setComposite(AlphaComposite.Src);
-		g2.setFont(new Font("Arial", Font.BOLD, 18));
-		FontMetrics fm = g2.getFontMetrics();
+	private boolean toggle_debug = false;
+
+	public void showSplash(Graphics2D g2) {
+		FontMetrics fm;
+		g2.setFont(new Font("Arial", Font.BOLD, 56));
+		g2.setColor(Color.RED);
+		fm = g2.getFontMetrics();
+		g2.drawString("ISU Monopoly", (this.frame.getWidth() / 2) - ((int)fm.getStringBounds("ISU Monopoly", g2).getWidth() / 2), fm.getAscent() + 200);
+
+		StartButton startButton = new StartButton((this.frame.getWidth() / 2), 275);
+
+		startButton.setLocation(startButton.getX() - (startButton.getBounds().width / 2), startButton.getY());
+
+		if(startButton.isMouseHovering(mousePos)) {
+			startButton.setHover(true);
+			if(mouseClicked) this.gameRef.startPlaying();
+		}
+		else startButton.setHover(false);
+
+		startButton.render(g2);
+
+		// g2.setColor(Color.BLACK);
+		// g2.setFont(new Font("Arial", Font.BOLD, 36));
+		// fm = g2.getFontMetrics();
+		// g2.drawString("Start game", (this.frame.getWidth() / 2) - ((int)fm.getStringBounds("Start game", g2).getWidth() / 2), fm.getAscent() + 300);
+	}
+
+	public void showGame(Graphics2D g2) {
+		FontMetrics fm;
 
 		DebugBox box = new DebugBox(0, 100);
 
-		if (box.isMouseHovering(this.mousePos)) {
-			box.setColor(Color.GREEN);
-			if (mouseClicked)
-				System.out.println("Clicked in the DEBUG BOX!!!");
-		} else {
-			box.setColor(Color.RED);
+		if (box.isMouseHovering(this.mousePos) && this.mouseClicked) {
+			toggle_debug = !toggle_debug;
 		}
+
+		box.setColor(toggle_debug ? Color.GREEN : Color.RED);
 
 		box.render(g2);
 
@@ -140,7 +160,20 @@ class Renderer extends Thread {
 		//
 		g2.setColor(Color.GREEN);
 
+		fm = g2.getFontMetrics();
 		g2.drawString("Monopoly", 20, fm.getAscent());
+	}
+
+	@Override
+	public void run() {
+		Graphics2D g2 = this.frame.createGraphics();
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g2.setComposite(AlphaComposite.Src);
+		g2.setFont(new Font("Arial", Font.BOLD, 18));
+
+		if(!this.gameRef.isPlaying)
+			showSplash(g2);
+		else showGame(g2);
 
 		g2.dispose();
 	}
@@ -253,8 +286,18 @@ public class Game {
 		}
 	}
 
+	public void startPlaying() {
+		this.isPlaying = true;
+	}
+
+	public void stopPlaying() {
+		this.isPlaying = false;
+	}
+
 	private BufferedImage selectedFrame;
 	private BufferedImage frontFrame;
 	private BufferedImage backFrame;
+
+	protected boolean isPlaying = false;
 
 }
