@@ -16,12 +16,12 @@ public class Window extends JFrame {
 		super(title); // set title and initialize JFrame
 		super.setAlwaysOnTop(true); // always on top of other apps
 		super.setDefaultCloseOperation(DISPOSE_ON_CLOSE); // don't exit on close, allow for clean up
-		super.setLocationRelativeTo(null); // center on screen
 		Dimension defaultDimension = new Dimension(800, 800); // set default window size
 		super.setSize(defaultDimension);
 		super.setPreferredSize(defaultDimension);
 		super.setResizable(false); // allow the window to be resized
 		super.setOpacity(1.0f); // enforce window opacity (transparency)
+		super.setLocationRelativeTo(null); // center on screen
 		gamePanel = new GamePanel(); // create the game's JPanel
 		super.add(gamePanel);
 		super.setVisible(true); // show the JFrame
