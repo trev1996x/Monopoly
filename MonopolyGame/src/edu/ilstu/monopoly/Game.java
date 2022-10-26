@@ -172,10 +172,6 @@ class Renderer extends Thread {
 		//
 		//
 		//
-		g2.setColor(Color.GREEN);
-
-		fm = g2.getFontMetrics();
-		g2.drawString("Monopoly", 20, fm.getAscent());
 	}
 
 	@Override
@@ -188,6 +184,11 @@ class Renderer extends Thread {
 		if(!this.gameRef.isPlaying)
 			showSplash(g2); // Show the splash screen
 		else showGame(g2); // Show the game
+
+		FontMetrics fm = g2.getFontMetrics();
+		g2.setColor(Color.GREEN);
+		fm = g2.getFontMetrics();
+		g2.drawString("Monopoly", 20, fm.getAscent());
 
 		g2.dispose();
 	}
@@ -236,6 +237,9 @@ class Renderer extends Thread {
 
 	private boolean mouseClicked;
 
+	private long framesCounted = 0L;
+
+	private long lastCounted = 0L;
 }
 
 public class Game {
