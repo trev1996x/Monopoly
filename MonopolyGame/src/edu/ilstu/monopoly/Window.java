@@ -9,6 +9,7 @@ public class Window extends JFrame {
 
 	/**
 	 * JFrame constructor
+	 * 
 	 * @param title Title of the JFrame
 	 */
 	Window(String title) {
@@ -16,23 +17,24 @@ public class Window extends JFrame {
 		super.setAlwaysOnTop(true); // always on top of other apps
 		super.setDefaultCloseOperation(DISPOSE_ON_CLOSE); // don't exit on close, allow for clean up
 		super.setLocationRelativeTo(null); // center on screen
-		Dimension defaultDimension = new Dimension(800,600); // set default window size
+		Dimension defaultDimension = new Dimension(800, 800); // set default window size
 		super.setSize(defaultDimension);
 		super.setPreferredSize(defaultDimension);
-		super.setResizable(true); // allow the window to be resized
+		super.setResizable(false); // allow the window to be resized
 		super.setOpacity(1.0f); // enforce window opacity (transparency)
 		gamePanel = new GamePanel(); // create the game's JPanel
 		super.add(gamePanel);
 		super.setVisible(true); // show the JFrame
 	}
-	
+
 	/**
 	 * Get the JPanel
+	 * 
 	 * @return GamePanel
 	 */
 	public GamePanel getGamePanel() {
 		return this.gamePanel;
 	}
-	
+
 	private GamePanel gamePanel;
 }

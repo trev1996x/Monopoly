@@ -17,9 +17,9 @@ public class GamePanel extends JPanel {
 	 */
 	GamePanel() {
 		super();
-		
-		this.mousePos = new Point(0,0);
-		
+
+		this.mousePos = new Point(0, 0);
+
 		super.addMouseMotionListener(new MouseMotionAdapter() { // good code isn't always good code lol
 			@Override
 			public void mouseMoved(MouseEvent e) {
@@ -27,33 +27,35 @@ public class GamePanel extends JPanel {
 			}
 		});
 	}
-	
+
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
+
 		// Draw the frame given to the JPanel
-		g.drawImage(this.frame, super.getX(), super.getY(), Color.BLACK, getFocusCycleRootAncestor());
+		g.drawImage(this.frame, super.getX(), super.getY(), Color.WHITE, getFocusCycleRootAncestor());
 		g.dispose();
 	}
-	
+
 	/**
 	 * Configure the frame to display for the JPanel
+	 * 
 	 * @param newFrame BufferedImage
 	 */
 	public void setFrame(BufferedImage newFrame) {
 		this.frame = newFrame;
 		super.repaint();
 	}
-	
+
 	/**
 	 * Get the mouse position on the JPanel
+	 * 
 	 * @return Mouse position
 	 */
 	public Point getMousePosition() {
 		return this.mousePos;
 	}
-	
+
 	private BufferedImage frame;
 	private Point mousePos;
 }
