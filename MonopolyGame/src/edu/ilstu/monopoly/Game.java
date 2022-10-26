@@ -13,14 +13,13 @@ import javax.swing.JFrame;
 
 import edu.ilstu.monopoly.items.*;
 
-// If you want to implement keyboard + clicking,
-// you will need to implement a keyboard + mouse cache.
-// these should be cleared only on new frames!!!
-// will require some annoying work, but that should be the worst of it
-
 class Renderer extends Thread {
-	private boolean toggle_debug = false;
+	private boolean toggle_debug = false; // for DebugBox colors
 
+	/**
+	 * Show the splash screen
+	 * @param g2 Graphics2D
+	 */
 	public void showSplash(Graphics2D g2) {
 		FontMetrics fm;
 		g2.setFont(new Font("Arial", Font.BOLD, 56));
@@ -54,12 +53,12 @@ class Renderer extends Thread {
 
 		creditsButton.render(g2);
 
-		// g2.setColor(Color.BLACK);
-		// g2.setFont(new Font("Arial", Font.BOLD, 36));
-		// fm = g2.getFontMetrics();
-		// g2.drawString("Start game", (this.frame.getWidth() / 2) - ((int)fm.getStringBounds("Start game", g2).getWidth() / 2), fm.getAscent() + 300);
-	}
+		}
 
+	/**
+	 * Render the game
+	 * @param g2 Graphics2D
+	 */
 	public void showGame(Graphics2D g2) {
 		FontMetrics fm;
 
@@ -187,8 +186,8 @@ class Renderer extends Thread {
 		g2.setFont(new Font("Arial", Font.BOLD, 18));
 
 		if(!this.gameRef.isPlaying)
-			showSplash(g2);
-		else showGame(g2);
+			showSplash(g2); // Show the splash screen
+		else showGame(g2); // Show the game
 
 		g2.dispose();
 	}
@@ -220,6 +219,10 @@ class Renderer extends Thread {
 		this.mousePos = mousePos;
 	}
 
+	/**
+	 * Set the thread's cached Mouse Clicked Status
+	 * @param mouseClicked
+	 */
 	public void setMouseClicked(boolean mouseClicked) {
 		this.mouseClicked = mouseClicked;
 	}
@@ -302,14 +305,21 @@ public class Game {
 		}
 	}
 
+	/**
+	 * Start the game
+	 */
 	public void startPlaying() {
 		this.isPlaying = true;
 	}
 
+	/**
+	 * Stop the game
+	 */
 	public void stopPlaying() {
 		this.isPlaying = false;
 	}
 
+	// By making these protected, they are accessible in the Renderer (Thread)
 	protected Window mainWindow;
 	protected GamePanel display;
 

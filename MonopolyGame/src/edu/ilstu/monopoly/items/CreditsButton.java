@@ -51,6 +51,10 @@ public class CreditsButton extends Renderable {
 		return new Rectangle(this.x, this.y, this.width, this.height);
 	}
 	
+	/**
+	 * Set the hover status of the button
+	 * @param isHover
+	 */
 	public void setHover(boolean isHover) {
 		this.drawHoverFactor = isHover;
 	}
@@ -75,6 +79,10 @@ public class CreditsButton extends Renderable {
 		return false;
 	}
 
+	/**
+	 * Show the credits box
+	 * @param owner The main window (JFrame)
+	 */
     public void showInfoBox(JFrame owner) {
         // if(this.infoBox != null && this.infoBox.isDisplayable()) return;
 
