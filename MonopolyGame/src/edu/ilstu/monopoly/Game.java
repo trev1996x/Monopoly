@@ -174,6 +174,32 @@ class Renderer extends Thread {
 		//
 	}
 
+	/**
+	 * Render the header + FPS counter
+	 * @param g2 Graphics2D
+	 */
+	public void drawHeader(Graphics2D g2) {
+		g2.setColor(Color.DARK_GRAY);
+		g2.fillRect(0, 0, this.frame.getWidth(), 18);
+
+		g2.setFont(new Font("Arial", Font.BOLD, 18));
+		FontMetrics fm = g2.getFontMetrics();
+		g2.setColor(Color.WHITE);
+		fm = g2.getFontMetrics();
+		g2.drawString("Monopoly", 20, fm.getAscent());
+
+		this.framesNow += 1L;
+
+		long now = System.currentTimeMillis();
+		if(now - this.lastCounted >= 1_000L) {
+			this.lastCounted = now;
+			this.framesThen = this.framesNow;
+			this.framesNow = 0L;
+		}
+
+		g2.drawString(Long.toString(this.framesThen) + " FPS", this.frame.getWidth() - (int)fm.getStringBounds(Long.toString(this.framesThen) + " FPS", g2).getWidth() - 20, fm.getAscent());
+	}
+
 	@Override
 	public void run() {
 		Graphics2D g2 = this.frame.createGraphics();
@@ -185,10 +211,7 @@ class Renderer extends Thread {
 			showSplash(g2); // Show the splash screen
 		else showGame(g2); // Show the game
 
-		FontMetrics fm = g2.getFontMetrics();
-		g2.setColor(Color.GREEN);
-		fm = g2.getFontMetrics();
-		g2.drawString("Monopoly", 20, fm.getAscent());
+		drawHeader(g2);
 
 		g2.dispose();
 	}
@@ -237,7 +260,9 @@ class Renderer extends Thread {
 
 	private boolean mouseClicked;
 
-	private long framesCounted = 0L;
+	private long framesThen = 0L;
+
+	private long framesNow = 0L;
 
 	private long lastCounted = 0L;
 }
