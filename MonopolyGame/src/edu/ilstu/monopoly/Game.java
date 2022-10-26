@@ -23,8 +23,10 @@ class Renderer extends Thread {
 	public void showSplash(Graphics2D g2) {
 		FontMetrics fm;
 		g2.setFont(new Font("Arial", Font.BOLD, 56));
-		g2.setColor(Color.RED);
+		g2.setColor(Color.BLACK);
 		fm = g2.getFontMetrics();
+		g2.drawString("ISU Monopoly", (this.frame.getWidth() / 2) - ((int)fm.getStringBounds("ISU Monopoly", g2).getWidth() / 2) + 5, fm.getAscent() + 200 + 5);
+		g2.setColor(Color.RED);
 		g2.drawString("ISU Monopoly", (this.frame.getWidth() / 2) - ((int)fm.getStringBounds("ISU Monopoly", g2).getWidth() / 2), fm.getAscent() + 200);
 
 		StartButton startButton = new StartButton((this.frame.getWidth() / 2), 275);
