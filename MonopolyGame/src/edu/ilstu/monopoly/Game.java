@@ -9,6 +9,7 @@ import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.lang.Thread;
+import javax.swing.JFrame;
 
 import edu.ilstu.monopoly.items.*;
 
@@ -40,6 +41,18 @@ class Renderer extends Thread {
 		else startButton.setHover(false);
 
 		startButton.render(g2);
+
+		CreditsButton creditsButton = new CreditsButton((this.frame.getWidth() / 2), 355);
+
+		creditsButton.setLocation(creditsButton.getX() - (creditsButton.getBounds().width / 2), creditsButton.getY());
+
+		if(creditsButton.isMouseHovering(mousePos)) {
+			creditsButton.setHover(true);
+			if(mouseClicked) creditsButton.showInfoBox((JFrame)this.gameRef.mainWindow);
+		}
+		else creditsButton.setHover(false);
+
+		creditsButton.render(g2);
 
 		// g2.setColor(Color.BLACK);
 		// g2.setFont(new Font("Arial", Font.BOLD, 36));
@@ -228,10 +241,11 @@ public class Game {
 	 * Very basic constructor. Initialize JFrame and run the "run" method.
 	 */
 	public Game() {
-		Window mainWindow = new Window("ISU Monopoly");
+		this.mainWindow = new Window("ISU Monopoly");
+		this.display = mainWindow.getGamePanel();
 
 		try {
-			this.run(mainWindow.getGamePanel());
+			this.run();
 		} catch (InterruptedException ie) { // "ie" stands for internet explorer btw
 			ie.printStackTrace();
 		}
@@ -244,9 +258,9 @@ public class Game {
 	 * @param display Game JPanel
 	 * @throws InterruptedException Thread interrupted exception
 	 */
-	public void run(GamePanel display) throws InterruptedException {
+	public void run() throws InterruptedException {
 		// Set the front (first) frame to be rendered
-		this.frontFrame = new BufferedImage(display.getWidth(), display.getHeight(), BufferedImage.TYPE_INT_ARGB);
+		this.frontFrame = new BufferedImage(this.display.getWidth(), this.display.getHeight(), BufferedImage.TYPE_INT_ARGB);
 		this.selectedFrame = this.frontFrame;
 
 		// Initialize the renderer (thread)
@@ -254,27 +268,27 @@ public class Game {
 		renderer.setGame(this);
 
 		// While the JPanel can display something, keep rendering.
-		while (display.isDisplayable()) {
+		while (this.display.isDisplayable()) {
 
 			// Cache the Mouse Position from the JPanel
-			renderer.setMousePosition(display.getMousePosition());
-			renderer.setMouseClicked(display.getMouseClicked()); // get cached click action
-			display.resetMouseClicked(); // reset action
+			renderer.setMousePosition(this.display.getMousePosition());
+			renderer.setMouseClicked(this.display.getMouseClicked()); // get cached click action
+			this.display.resetMouseClicked(); // reset action
 
 			if (this.selectedFrame == this.frontFrame) {
 				// Show first frame on JPanel
-				display.setFrame(this.selectedFrame);
+				this.display.setFrame(this.selectedFrame);
 				// Render the other frame
-				this.backFrame = new BufferedImage(display.getWidth(), display.getHeight(),
+				this.backFrame = new BufferedImage(this.display.getWidth(), this.display.getHeight(),
 						BufferedImage.TYPE_INT_ARGB);
 				this.selectedFrame = this.backFrame;
 				renderer.setFrame(this.selectedFrame);
 				renderer.run();
 			} else {
 				// Show second frame on JPanel
-				display.setFrame(this.selectedFrame);
+				this.display.setFrame(this.selectedFrame);
 				// Render the other frame
-				this.frontFrame = new BufferedImage(display.getWidth(), display.getHeight(),
+				this.frontFrame = new BufferedImage(this.display.getWidth(), this.display.getHeight(),
 						BufferedImage.TYPE_INT_ARGB);
 				this.selectedFrame = this.frontFrame;
 				renderer.setFrame(this.selectedFrame);
@@ -296,10 +310,12 @@ public class Game {
 		this.isPlaying = false;
 	}
 
+	protected Window mainWindow;
+	protected GamePanel display;
+
 	private BufferedImage selectedFrame;
 	private BufferedImage frontFrame;
 	private BufferedImage backFrame;
 
 	protected boolean isPlaying = false;
-
 }
