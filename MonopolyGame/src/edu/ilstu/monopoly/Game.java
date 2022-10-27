@@ -107,6 +107,7 @@ class Renderer extends Thread {
 
 		/**
 		 * Begins top/north side panel
+		 * x-axis increments by 70
 		 */
 		g2.setColor(Color.BLACK);
 		GameBox box1 = new GameBox(0, 20, frameWidth / 11, frameHeight / 11);
@@ -154,46 +155,47 @@ class Renderer extends Thread {
 
 		/**
 		 * Begins right/east side panel
+		 * y-axis increments by 68
 		 */
 
 		g2.setColor(Color.RED);
-		GameBox box12 = new GameBox(700, 90, frameWidth / 11, frameHeight / 11);
+		GameBox box12 = new GameBox(700, 88, frameWidth / 11, frameHeight / 11);
 		box12.render(g2);
 
 		g2.setColor(Color.BLUE);
-		GameBox box13 = new GameBox(700, 160, frameWidth / 11, frameHeight / 11);
+		GameBox box13 = new GameBox(700, 156, frameWidth / 11, frameHeight / 11);
 		box13.render(g2);
 
 		g2.setColor(Color.RED);
-		GameBox box14 = new GameBox(700, 230, frameWidth / 11, frameHeight / 11);
+		GameBox box14 = new GameBox(700, 224, frameWidth / 11, frameHeight / 11);
 		box14.render(g2);
 
 		g2.setColor(Color.BLUE);
-		GameBox box15 = new GameBox(700, 300, frameWidth / 11, frameHeight / 11);
+		GameBox box15 = new GameBox(700, 292, frameWidth / 11, frameHeight / 11);
 		box15.render(g2);
 
 		g2.setColor(Color.RED);
-		GameBox box16 = new GameBox(700, 370, frameWidth / 11, frameHeight / 11);
+		GameBox box16 = new GameBox(700, 360, frameWidth / 11, frameHeight / 11);
 		box16.render(g2);
 
 		g2.setColor(Color.BLUE);
-		GameBox box17 = new GameBox(700, 440, frameWidth / 11, frameHeight / 11);
+		GameBox box17 = new GameBox(700, 428, frameWidth / 11, frameHeight / 11);
 		box17.render(g2);
 
 		g2.setColor(Color.RED);
-		GameBox box18 = new GameBox(700, 510, frameWidth / 11, frameHeight / 11);
+		GameBox box18 = new GameBox(700, 496, frameWidth / 11, frameHeight / 11);
 		box18.render(g2);
 
 		g2.setColor(Color.BLUE);
-		GameBox box19 = new GameBox(700, 580, frameWidth / 11, frameHeight / 11);
+		GameBox box19 = new GameBox(700, 564, frameWidth / 11, frameHeight / 11);
 		box19.render(g2);
 
 		g2.setColor(Color.RED);
-		GameBox box20 = new GameBox(700, 650, frameWidth / 11, frameHeight / 11);
+		GameBox box20 = new GameBox(700, 632, frameWidth / 11, frameHeight / 11);
 		box20.render(g2);
 
 		g2.setColor(Color.BLUE);
-		GameBox box21 = new GameBox(700, 720, frameWidth / 11, frameHeight / 11);
+		GameBox box21 = new GameBox(700, 700, frameWidth / 11, frameHeight / 11);
 		box21.render(g2);
 
 		//
