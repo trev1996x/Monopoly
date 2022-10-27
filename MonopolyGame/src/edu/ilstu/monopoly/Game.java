@@ -26,10 +26,12 @@ class Renderer extends Thread {
 		g2.setFont(new Font("Arial", Font.BOLD, 18));
 		FontMetrics fm = g2.getFontMetrics();
 
-		DebugBox box = new DebugBox(100, 100);
+		DebugBox box = new DebugBox(0, 100);
 
 		if (box.isMouseHovering(this.mousePos)) {
 			box.setColor(Color.GREEN);
+			if (mouseClicked)
+				System.out.println("Clicked in the DEBUG BOX!!!");
 		} else {
 			box.setColor(Color.RED);
 		}
@@ -39,31 +41,96 @@ class Renderer extends Thread {
 		int frameWidth = this.frame.getWidth(),
 				frameHeight = this.frame.getHeight();
 
-		g2.setColor(Color.ORANGE); // set color
-		//
-		//
-		//
-		//
-		//
-		//
-		//
+		/**
+		 * Begins top/north side panel
+		 */
+		g2.setColor(Color.BLACK);
+		GameBox box1 = new GameBox(0, 20, frameWidth / 10, frameHeight / 10);
+		box1.render(g2);
 
-		GameBox box2 = new GameBox(300, 300, frameWidth / 10, frameHeight / 10); // create object
+		g2.setColor(Color.BLUE); // set color
+		GameBox box2 = new GameBox(80, 20, frameWidth / 10, frameHeight / 10); // create object
 		box2.render(g2); // draw object to screen
 
 		g2.setColor(Color.RED);
-
-		GameBox box3 = new GameBox(380, 300, frameWidth / 10, frameHeight / 10);
+		GameBox box3 = new GameBox(160, 20, frameWidth / 10, frameHeight / 10);
 		box3.render(g2);
 
-		g2.setColor(Color.GREEN);
-		GameBox box4 = new GameBox(460, 300, frameWidth / 10, frameHeight / 10);
+		g2.setColor(Color.BLUE);
+		GameBox box4 = new GameBox(240, 20, frameWidth / 10, frameHeight / 10);
 		box4.render(g2);
 
-		g2.setColor(Color.PINK);
-		GameBox box5 = new GameBox(540, 300, frameWidth / 10, frameHeight / 10);
+		g2.setColor(Color.RED);
+		GameBox box5 = new GameBox(320, 20, frameWidth / 10, frameHeight / 10);
 		box5.render(g2);
-		//
+
+		g2.setColor(Color.BLUE);
+		GameBox box6 = new GameBox(400, 20, frameWidth / 10, frameHeight / 10);
+		box6.render(g2);
+
+		g2.setColor(Color.RED);
+		GameBox box7 = new GameBox(480, 20, frameWidth / 10, frameHeight / 10);
+		box7.render(g2);
+
+		g2.setColor(Color.BLUE);
+		GameBox box8 = new GameBox(560, 20, frameWidth / 10, frameHeight / 10);
+		box8.render(g2);
+
+		g2.setColor(Color.RED);
+		GameBox box9 = new GameBox(640, 20, frameWidth / 10, frameHeight / 10);
+		box9.render(g2);
+
+		g2.setColor(Color.BLUE);
+		GameBox box10 = new GameBox(720, 20, frameWidth / 10, frameHeight / 10);
+		box10.render(g2);
+
+		/**
+		 * Begins right/east side panel
+		 */
+		g2.setColor(Color.BLACK);
+		GameBox box11 = new GameBox(800, 20, frameWidth / 10, frameHeight / 10);
+		box11.render(g2);
+
+		g2.setColor(Color.RED);
+		GameBox box12 = new GameBox(800, 20, frameWidth / 10, frameHeight / 10);
+		box12.render(g2);
+
+		g2.setColor(Color.BLUE);
+		GameBox box13 = new GameBox(800, 100, frameWidth / 10, frameHeight / 10);
+		box13.render(g2);
+
+		g2.setColor(Color.RED);
+		GameBox box14 = new GameBox(800, 180, frameWidth / 10, frameHeight / 10);
+		box14.render(g2);
+
+		g2.setColor(Color.BLUE);
+		GameBox box15 = new GameBox(800, 260, frameWidth / 10, frameHeight / 10);
+		box15.render(g2);
+
+		g2.setColor(Color.RED);
+		GameBox box16 = new GameBox(800, 340, frameWidth / 10, frameHeight / 10);
+		box16.render(g2);
+
+		g2.setColor(Color.BLUE);
+		GameBox box17 = new GameBox(800, 420, frameWidth / 10, frameHeight / 10);
+		box17.render(g2);
+
+		g2.setColor(Color.RED);
+		GameBox box18 = new GameBox(800, 500, frameWidth / 10, frameHeight / 10);
+		box18.render(g2);
+
+		g2.setColor(Color.BLUE);
+		GameBox box19 = new GameBox(800, 580, frameWidth / 10, frameHeight / 10);
+		box19.render(g2);
+
+		g2.setColor(Color.RED);
+		GameBox box20 = new GameBox(800, 640, frameWidth / 10, frameHeight / 10);
+		box20.render(g2);
+
+		g2.setColor(Color.BLUE);
+		GameBox box21 = new GameBox(800, 720, frameWidth / 10, frameHeight / 10);
+		box21.render(g2);
+
 		//
 		//
 		//
@@ -105,12 +172,19 @@ class Renderer extends Thread {
 		this.mousePos = mousePos;
 	}
 
+	public void setMouseClicked(boolean mouseClicked) {
+		this.mouseClicked = mouseClicked;
+	}
+
 	@SuppressWarnings("unused")
 	private Game gameRef;
 
 	private BufferedImage frame;
 
 	private Point mousePos;
+
+	private boolean mouseClicked;
+
 }
 
 public class Game {
@@ -149,6 +223,8 @@ public class Game {
 
 			// Cache the Mouse Position from the JPanel
 			renderer.setMousePosition(display.getMousePosition());
+			renderer.setMouseClicked(display.getMouseClicked()); // get cached click action
+			display.resetMouseClicked(); // reset action
 
 			if (this.selectedFrame == this.frontFrame) {
 				// Show first frame on JPanel

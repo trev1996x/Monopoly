@@ -2,14 +2,13 @@ package edu.ilstu.monopoly;
 
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.awt.event.*;
 
 import javax.swing.JPanel;
 
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel /* implements MouseInputListener */ {
 	private static final long serialVersionUID = 8063771689965221597L; // auto-gen by Eclipse
 
 	/**
@@ -20,12 +19,20 @@ public class GamePanel extends JPanel {
 
 		this.mousePos = new Point(0, 0);
 
-		super.addMouseMotionListener(new MouseMotionAdapter() { // good code isn't always good code lol
+		super.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseMoved(MouseEvent e) {
-				mousePos = e.getPoint(); // do not precede with "this." as "this" will refer to the adapter
+			public void mouseClicked(MouseEvent e) {
+				mouseClicked = true;
 			}
 		});
+
+		super.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				mousePos = e.getPoint();
+			}
+		});
+
 	}
 
 	@Override
@@ -56,6 +63,15 @@ public class GamePanel extends JPanel {
 		return this.mousePos;
 	}
 
+	public boolean getMouseClicked() {
+		return this.mouseClicked;
+	}
+
+	public void resetMouseClicked() {
+		this.mouseClicked = false;
+	}
+
 	private BufferedImage frame;
 	private Point mousePos;
+	private boolean mouseClicked = false;
 }
