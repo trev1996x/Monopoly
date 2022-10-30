@@ -13,7 +13,9 @@ import java.awt.image.BufferedImage;
 import java.lang.Thread;
 import java.io.File;
 import java.io.IOException;
-
+import java.util.ArrayList;
+import java.awt.Shape;
+import java.awt.geom.Rectangle2D;
 import javax.swing.JFrame;
 import javax.imageio.ImageIO;
 
@@ -83,6 +85,41 @@ class Renderer extends Thread {
 
 		creditsButton.render(g2);
 
+	}
+
+	public static void drawLabel(Graphics2D g2, String text, Color color, int fontSize, int x, int y) {
+		FontMetrics fm;
+		g2.setFont(new Font("Arial", Font.BOLD, fontSize));
+		g2.setColor(color);
+		fm = g2.getFontMetrics();
+		g2.drawString(text, x, fm.getAscent() + y);
+	}
+
+	/**
+	 * Show the splash screen
+	 * 
+	 * @param g2 Graphics2D
+	 */
+	public void showSetUp(Graphics2D g2) {
+
+		FontMetrics fm;
+		// g2.setFont(new Font("Arial", Font.BOLD, 56));
+		// g2.setColor(Color.blue);
+
+
+
+		
+		Shape rectangle1 = new Rectangle2D.Double(130.0, 200.0, 160.0, 100.0);
+		g2.fill(rectangle1);
+		
+		
+
+
+		
+		
+
+		
+		
 	}
 
 	/**
@@ -244,10 +281,18 @@ class Renderer extends Thread {
 		g2.setComposite(AlphaComposite.Src);
 		g2.setFont(new Font("Arial", Font.BOLD, 18));
 
-		if (!this.gameRef.isPlaying)
-			showSplash(g2);
-		else
-			showGame(g2); // Show the game
+		switch(this.gameRef.status) {
+			case CURRENTLY_PLAYING:
+				this.showGame(g2);
+				break;
+			case GAME_SETUP:
+				this.showSetUp(g2);
+				break;
+			case SPLASH_SCREEN:
+			default:
+				this.showSplash(g2);
+				break;
+		}
 
 		drawHeader(g2);
 
@@ -378,14 +423,14 @@ public class Game {
 	 * Start the game
 	 */
 	public void startPlaying() {
-		this.isPlaying = true;
+		this.status = GameStatus.GAME_SETUP;
 	}
 
 	/**
 	 * Stop the game
 	 */
 	public void stopPlaying() {
-		this.isPlaying = false;
+		this.status = GameStatus.SPLASH_SCREEN;
 	}
 
 	// By making these protected, they are accessible in the Renderer (Thread)
@@ -396,5 +441,13 @@ public class Game {
 	private BufferedImage frontFrame;
 	private BufferedImage backFrame;
 
-	protected boolean isPlaying = false;
+	protected ArrayList<Player> players = new ArrayList<Player>(Player.MAX_PLAYERS);
+
+	public enum GameStatus {
+		SPLASH_SCREEN,
+		GAME_SETUP,
+		CURRENTLY_PLAYING
+	}
+
+	protected GameStatus status = GameStatus.SPLASH_SCREEN;
 }
