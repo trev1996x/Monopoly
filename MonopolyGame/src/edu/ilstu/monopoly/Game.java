@@ -14,6 +14,7 @@ import java.lang.Thread;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import javax.swing.JFrame;
@@ -106,20 +107,9 @@ class Renderer extends Thread {
 		// g2.setFont(new Font("Arial", Font.BOLD, 56));
 		// g2.setColor(Color.blue);
 
-
-
-		
 		Shape rectangle1 = new Rectangle2D.Double(130.0, 200.0, 160.0, 100.0);
 		g2.fill(rectangle1);
-		
-		
 
-
-		
-		
-
-		
-		
 	}
 
 	/**
@@ -272,6 +262,7 @@ class Renderer extends Thread {
 				Long.toString(this.framesThen) + " FPS", this.frame.getWidth()
 						- (int) fm.getStringBounds(Long.toString(this.framesThen) + " FPS", g2).getWidth() - 20,
 				fm.getAscent());
+
 	}
 
 	@Override
@@ -281,12 +272,13 @@ class Renderer extends Thread {
 		g2.setComposite(AlphaComposite.Src);
 		g2.setFont(new Font("Arial", Font.BOLD, 18));
 
-		switch(this.gameRef.status) {
+		switch (this.gameRef.status) {
 			case CURRENTLY_PLAYING:
 				this.showGame(g2);
 				break;
 			case GAME_SETUP:
-				this.showSetUp(g2);
+				// this.showSetUp(g2);
+				this.showGame(g2);
 				break;
 			case SPLASH_SCREEN:
 			default:
@@ -365,6 +357,10 @@ public class Game {
 		} catch (InterruptedException ie) { // "ie" stands for internet explorer btw
 			ie.printStackTrace();
 		}
+
+		// test player
+		Player testPlayer = new Player();
+		testPlayer.render(g2);
 
 	}
 

@@ -3,6 +3,7 @@ package edu.ilstu.monopoly.items;
 import java.awt.Rectangle;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Color;
 
 import edu.ilstu.monopoly.Renderable;
 
@@ -20,7 +21,8 @@ public class Player extends Renderable {
      */
     @Override
     public void render(Graphics2D g2) {
-
+        g2.setColor(Color.BLUE);
+        g2.drawRect(100, 100, 50, 50);
     }
 
     /**
