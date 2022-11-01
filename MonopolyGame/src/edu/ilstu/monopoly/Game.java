@@ -232,6 +232,7 @@ class Renderer extends Thread {
 		//
 		//
 		//
+		for(Player player : this.gameRef.players) player.render(g2); // render each player
 	}
 
 	/**
@@ -358,10 +359,7 @@ public class Game {
 			ie.printStackTrace();
 		}
 
-		// test player
-		Player testPlayer = new Player();
-		testPlayer.render(g2);
-
+		this.players.add(new Player()); // Example adding a new player
 	}
 
 	/**
