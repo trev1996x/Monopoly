@@ -8,6 +8,9 @@ import java.awt.Color;
 import edu.ilstu.monopoly.Renderable;
 
 public class Player extends Renderable {
+    public Player() {
+        System.out.println("Created a new player.");
+    }
     /**
      * Temporary
      */
@@ -22,7 +25,7 @@ public class Player extends Renderable {
     @Override
     public void render(Graphics2D g2) {
         g2.setColor(Color.BLUE);
-        g2.drawRect(100, 100, 50, 50);
+        g2.fillRect(100, 100, 50, 50);
     }
 
     /**
@@ -33,6 +36,6 @@ public class Player extends Renderable {
         return false;
     }
 
-    private int playerNumber = 0;
+    // private int playerNumber = 0;
     public static final int MAX_PLAYERS = 4;
 }

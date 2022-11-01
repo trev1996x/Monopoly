@@ -14,7 +14,6 @@ import java.lang.Thread;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Currency;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import javax.swing.JFrame;
@@ -103,7 +102,7 @@ class Renderer extends Thread {
 	 */
 	public void showSetUp(Graphics2D g2) {
 
-		FontMetrics fm;
+		// FontMetrics fm;
 		// g2.setFont(new Font("Arial", Font.BOLD, 56));
 		// g2.setColor(Color.blue);
 
@@ -232,7 +231,7 @@ class Renderer extends Thread {
 		//
 		//
 		//
-		for(Player player : this.gameRef.players) player.render(g2); // render each player
+		for(Player player : this.gameRef.players) if(player != null) player.render(g2);
 	}
 
 	/**
@@ -353,13 +352,16 @@ public class Game {
 		this.mainWindow = new Window("ISU Monopoly");
 		this.display = mainWindow.getGamePanel();
 
+		this.players.add(new Player()); // Example adding a new player (use for Reference)
+
+		this.players.trimToSize(); // Leave this here
+
+		// This will start the game threads, so this MUST run last!
 		try {
 			this.run();
 		} catch (InterruptedException ie) { // "ie" stands for internet explorer btw
 			ie.printStackTrace();
 		}
-
-		this.players.add(new Player()); // Example adding a new player
 	}
 
 	/**
