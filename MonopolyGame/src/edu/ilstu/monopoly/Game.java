@@ -43,49 +43,25 @@ public class Game {
 		Renderer renderer = new Renderer();
 		renderer.setGame(this);
 
-		int boxSize = 70, verticalOffset = 18;
+		int boxSize = 65, verticalOffset = 34, horizontalOffset = 43;
 
-		// TODO: Fix these damn boxes
-		renderer.boxes[0] = new GameBox(boxSize*0, verticalOffset, boxSize);
-		renderer.boxes[1] = new GameBox(boxSize*1, verticalOffset, boxSize);
-		renderer.boxes[2] = new GameBox(boxSize*2, verticalOffset, boxSize);
-		renderer.boxes[3] = new GameBox(boxSize*3, verticalOffset, boxSize);
-		renderer.boxes[4] = new GameBox(boxSize*4, verticalOffset, boxSize);
-		renderer.boxes[5] = new GameBox(boxSize*5, verticalOffset, boxSize);
-		renderer.boxes[6] = new GameBox(boxSize*6, verticalOffset, boxSize);
-		renderer.boxes[7] = new GameBox(boxSize*7, verticalOffset, boxSize);
-		renderer.boxes[8] = new GameBox(boxSize*8, verticalOffset, boxSize);
-		renderer.boxes[9] = new GameBox(boxSize*9, verticalOffset, boxSize);
-		renderer.boxes[10] = new GameBox(boxSize*9, verticalOffset + boxSize * 0, boxSize);
-		renderer.boxes[11] = new GameBox(boxSize*9, verticalOffset + boxSize * 1, boxSize);
-		renderer.boxes[12] = new GameBox(boxSize*9, verticalOffset + boxSize * 2, boxSize);
-		renderer.boxes[13] = new GameBox(boxSize*9, verticalOffset + boxSize * 3, boxSize);
-		renderer.boxes[14] = new GameBox(boxSize*9, verticalOffset + boxSize * 4, boxSize);
-		renderer.boxes[15] = new GameBox(boxSize*9, verticalOffset + boxSize * 5, boxSize);
-		renderer.boxes[16] = new GameBox(boxSize*9, verticalOffset + boxSize * 6, boxSize);
-		renderer.boxes[17] = new GameBox(boxSize*9, verticalOffset + boxSize * 7, boxSize);
-		renderer.boxes[18] = new GameBox(boxSize*9, verticalOffset + boxSize * 8, boxSize);
-		renderer.boxes[19] = new GameBox(boxSize*9, verticalOffset + boxSize * 9, boxSize);
-		renderer.boxes[20] = new GameBox(boxSize*9, verticalOffset + boxSize * 10, boxSize);
-		renderer.boxes[21] = new GameBox(630, 700, boxSize);
-		renderer.boxes[22] = new GameBox(560, 700, boxSize);
-		renderer.boxes[23] = new GameBox(490, 700, boxSize);
-		renderer.boxes[24] = new GameBox(420, 700, boxSize);
-		renderer.boxes[25] = new GameBox(350, 700, boxSize);
-		renderer.boxes[26] = new GameBox(280, 700, boxSize);
-		renderer.boxes[27] = new GameBox(210, 700, boxSize);
-		renderer.boxes[28] = new GameBox(140, 700, boxSize);
-		renderer.boxes[29] = new GameBox(0, 700, boxSize);
-		renderer.boxes[30] = new GameBox(0, 700, boxSize);
-		renderer.boxes[31] = new GameBox(0, 632, boxSize);
-		renderer.boxes[32] = new GameBox(0, 564, boxSize);
-		renderer.boxes[33] = new GameBox(0, 496, boxSize);
-		renderer.boxes[34] = new GameBox(0, 428, boxSize);
-		renderer.boxes[35] = new GameBox(0, 360, boxSize);
-		renderer.boxes[36] = new GameBox(0, 292, boxSize);
-		renderer.boxes[37] = new GameBox(0, 224, boxSize);
-		renderer.boxes[38] = new GameBox(0, 156, boxSize);
-		renderer.boxes[39] = new GameBox(0, 88, boxSize);
+		// generate top 11
+		for(int i = 0; i < 11; i++)
+			renderer.boxes[i] = new GameBox(horizontalOffset + boxSize * i, verticalOffset, boxSize);
+		
+		// generate right 9
+		for(int i = 11; i < 20; i++)
+			renderer.boxes[i] = new GameBox(horizontalOffset + boxSize * 10, verticalOffset + boxSize * (i - 10), boxSize);
+
+		// generate bottom 11
+		for(int i = 20; i < 31; i++)
+		renderer.boxes[i] = new GameBox(horizontalOffset + boxSize * (i - 20), verticalOffset + boxSize * 10, boxSize);
+
+		// generate left 9
+		for(int i = 31; i < 40; i++)
+			renderer.boxes[i] = new GameBox(horizontalOffset, verticalOffset + boxSize * (i - 30), boxSize);
+
+		// for(int i = 0; i < renderer.boxes.length; i++) if(renderer.boxes[i] == null) renderer.boxes[i] = new GameBox(0, 0, 0);
 
 		// While the JPanel can display something, keep rendering.
 		while (this.display.isDisplayable()) {

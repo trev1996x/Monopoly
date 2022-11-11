@@ -24,20 +24,29 @@ public class Renderer extends Thread {
     @SuppressWarnings("unused")
     private boolean toggle_debug = false; // for DebugBox colors
 
-    public void drawImage(Graphics2D g2, String imgSrc, Dimension imgSize) {
+    public static Image boardBackground = null;
+
+    public void drawImage(Graphics2D g2, BufferedImage image, String imgSrc, Dimension imgSize, int x, int y) {
+        g2.drawImage(
+                image,
+                x, y, Color.WHITE,
+                this.gameRef.display.getFocusCycleRootAncestor());
+    }
+
+    public void drawImage(Graphics2D g2, String imgSrc, Dimension imgSize, int x, int y) {
         try {
             g2.drawImage(
                     ImageIO.read(new File("resources/" + imgSrc)).getScaledInstance(imgSize.width, imgSize.height,
                             Image.SCALE_DEFAULT),
-                    0, 0, Color.WHITE,
+                    x, y, Color.WHITE,
                     this.gameRef.display.getFocusCycleRootAncestor());
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }
 
-    public void drawImage(Graphics2D g2, String imgSrc, int width, int height) {
-        drawImage(g2, imgSrc, new Dimension(width, height));
+    public void drawImage(Graphics2D g2, String imgSrc, int width, int height, int x, int y) {
+        drawImage(g2, imgSrc, new Dimension(width, height), x, y);
     }
 
     /**
@@ -131,11 +140,14 @@ public class Renderer extends Thread {
 
         // box.render(g2);
 
-        int frameWidth = this.frame.getWidth(),
-                frameHeight = this.frame.getHeight() - 20;
+        // int frameWidth = this.frame.getWidth(),
+        //         frameHeight = this.frame.getHeight() - 20;
 
+        // hardcoded board background
         g2.setColor(Color.GRAY);
-        g2.fillRect(0, 20, (frameWidth / 11) * 10, (frameHeight / 11) * 10);
+        g2.fillRect(43, 34, 65 * 11, 65 * 11); // area = 715x715
+        g2.drawImage(Renderer.boardBackground, 43, 34, Color.WHITE, this.gameRef.display.getFocusCycleRootAncestor());
+        // this.drawImage(g2, "background.png", new Dimension(715,715), 43, 34);
 
         /**
          * Begins top/north side panel
@@ -279,7 +291,10 @@ public class Renderer extends Thread {
         // Identifiers for game boxes
 
         if (this.diceRoll == null)
+        {
             diceRoll = new DiceRoll(200, 200);
+            diceRoll.setLocation(400 - (int)diceRoll.getBounds().getWidth() / 2, 600 - (int)diceRoll.getBounds().getHeight() / 2);
+        }
         this.diceRoll.rollDice();
         if (this.diceRolling && this.diceRoll.done_iterating) {
             // Dice done rolling!!
@@ -337,7 +352,6 @@ public class Renderer extends Thread {
             this.diceRolling = false; // reset
         }
         if (this.diceRoll.isMouseHovering(mousePos))
-
         {
             if (this.mouseClicked) {
                 this.diceRoll.startRoll();
@@ -358,7 +372,7 @@ public class Renderer extends Thread {
                 if (player.getGameBox() == null)
                     player.setGameBox(boxes[0]);
 
-        Color ActivePlayer = Color.YELLOW;
+        Color ActivePlayer = Color.ORANGE;
         Color InactivePlayer = Color.GREEN;
 
         for (Player player : this.gameRef.players)
@@ -408,6 +422,20 @@ public class Renderer extends Thread {
 
     @Override
     public void run() {
+
+        // preload IO
+        if(Renderer.boardBackground == null)
+        {
+            try {
+                Renderer.boardBackground = ImageIO.read(new File("resources/background.png")).getScaledInstance(715, 715,
+                            Image.SCALE_DEFAULT);
+                System.out.println("Imported resources/background.png");
+            } catch(IOException ioe) {
+                ioe.printStackTrace();
+            }
+        }
+        // ----------
+
         Graphics2D g2 = this.frame.createGraphics();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setComposite(AlphaComposite.Src);
