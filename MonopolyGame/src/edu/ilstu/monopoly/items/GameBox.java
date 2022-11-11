@@ -8,10 +8,9 @@ import edu.ilstu.monopoly.Renderable;
 
 public class GameBox extends Renderable {
 
-    public GameBox(int x, int y, int width, int height) {
+    public GameBox(int x, int y, int sideSize) {
         super(x, y);
-        this.width = width;
-        this.height = height;
+        this.width = this.height = sideSize;
     }
 
     @Override
