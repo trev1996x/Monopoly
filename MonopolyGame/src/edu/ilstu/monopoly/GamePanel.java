@@ -22,7 +22,9 @@ public class GamePanel extends JPanel /* implements MouseInputListener */ {
 		super.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				mouseClicked = true;
+				if(e.getButton() == MouseEvent.BUTTON1) {
+					mouseClicked = true;
+				}
 			}
 		});
 

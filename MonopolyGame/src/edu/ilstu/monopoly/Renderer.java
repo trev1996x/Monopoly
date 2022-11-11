@@ -68,7 +68,7 @@ public class Renderer extends Thread {
                 (this.frame.getWidth() / 2) - ((int) fm.getStringBounds("ISU Monopoly", g2).getWidth() / 2),
                 fm.getAscent() + 200);
 
-        StartButton startButton = new StartButton((this.frame.getWidth() / 2), 275);
+        StartButton startButton = new StartButton((this.frame.getWidth() / 2), 290);
 
         startButton.setLocation(startButton.getX() - (startButton.getBounds().width / 2), startButton.getY());
 
@@ -79,9 +79,22 @@ public class Renderer extends Thread {
         } else
             startButton.setHover(false);
 
-        startButton.render(g2);
+            startButton.render(g2);
 
-        CreditsButton creditsButton = new CreditsButton((this.frame.getWidth() / 2), 355);
+            InstructionsButton instructionsButton = new InstructionsButton((this.frame.getWidth() / 2), 375);
+    
+            instructionsButton.setLocation(instructionsButton.getX() - (instructionsButton.getBounds().width / 2), instructionsButton.getY());
+    
+            if (instructionsButton.isMouseHovering(mousePos)) {
+                instructionsButton.setHover(true);
+                if (mouseClicked)
+                instructionsButton.showInfoBox((JFrame) this.gameRef.mainWindow);
+            } else
+            instructionsButton.setHover(false);
+    
+            instructionsButton.render(g2);
+
+        CreditsButton creditsButton = new CreditsButton((this.frame.getWidth() / 2), 460);
 
         creditsButton.setLocation(creditsButton.getX() - (creditsButton.getBounds().width / 2), creditsButton.getY());
 
@@ -93,6 +106,7 @@ public class Renderer extends Thread {
             creditsButton.setHover(false);
 
         creditsButton.render(g2);
+
 
     }
 

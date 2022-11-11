@@ -6,25 +6,29 @@ import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
+import javax.swing.JFrame;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import java.awt.FlowLayout;
 
 import edu.ilstu.monopoly.Renderable;
 
-public class StartButton extends Renderable {
+public class InstructionsButton extends Renderable {
 	
     private static Font renderFont = new Font("Arial", Font.BOLD, 36);
 
-	public StartButton(int x, int y) {
+	public InstructionsButton(int x, int y) {
 		super(x,y);
-		this.width = 300;
+		this.width = 250;
 		this.height = 75;
 	}
 	
 	@Override
 	public void render(Graphics2D g2) {
-		g2.setFont(StartButton.renderFont);
+		g2.setFont(InstructionsButton.renderFont);
 		FontMetrics fm = g2.getFontMetrics();
 
-        String startStr = "Start game";
+        String startStr = "Manual";
 
         int strWidth = (int)fm.getStringBounds(startStr, g2).getWidth();
         //int strHeight = (int)fm.getStringBounds(startStr, g2).getHeight();
@@ -74,9 +78,40 @@ public class StartButton extends Renderable {
 		
 		return false;
 	}
+
+	/**
+	 * Show the credits box
+	 * @param owner The main window (JFrame)
+	 */
+    public void showInfoBox(JFrame owner) {
+        // if(this.infoBox != null && this.infoBox.isDisplayable()) return;
+
+        this.infoBox = new JDialog(owner, "Credits");
+
+        this.infoBox.setModal(true);
+        this.infoBox.setAlwaysOnTop(true);
+        this.infoBox.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        this.infoBox.setSize(350, 150);
+
+        FlowLayout layout = new FlowLayout();
+        layout.setAlignment(0);
+        this.infoBox.setLayout(layout);
+
+        JLabel credits = new JLabel("How to play ISU Monopoly:");
+        JLabel copyright = new JLabel("Manual to come...");
+
+        this.infoBox.add(credits);
+        this.infoBox.add(copyright);
+
+        this.infoBox.setLocationRelativeTo(null);
+        this.infoBox.setVisible(true);
+
+    }
 	
 	private int width;
 	private int height;
 	private boolean drawHoverFactor;
+
+    private JDialog infoBox;
 	
 }
