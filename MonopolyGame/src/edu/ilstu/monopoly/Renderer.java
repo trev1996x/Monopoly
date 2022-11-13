@@ -15,7 +15,10 @@ import java.io.File;
 import java.io.IOException;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
+
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.imageio.ImageIO;
 
 import edu.ilstu.monopoly.items.*;
@@ -75,7 +78,30 @@ public class Renderer extends Thread {
         if (startButton.isMouseHovering(mousePos)) {
             startButton.setHover(true);
             if (mouseClicked)
+            {
                 this.gameRef.startPlaying();
+                JDialog dialog = new JDialog(this.gameRef.mainWindow);
+                dialog.setTitle("Woah there!");
+                java.awt.FlowLayout layout = new java.awt.FlowLayout();
+                layout.setAlignment(0);
+                dialog.setLayout(layout);
+                Font font = new Font("Arial", Font.BOLD, 20);
+                JLabel label = new JLabel("As you may be able to tell after closing this dialog, something just ain't right...");
+                label.setFont(font);
+                JLabel label2 = new JLabel("If you can't seem to figure it out, try taking a look at the numbers...");
+                label2.setFont(font);
+                JLabel label3 = new JLabel("Yeah, that's a TODO task.");
+                label3.setFont(font);
+                dialog.add(label);
+                dialog.add(label2);
+                dialog.add(label3);
+                dialog.setModal(true);
+                dialog.setLocationRelativeTo(null);
+                dialog.setSize(new Dimension(800,150));
+                dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                dialog.setResizable(false);
+                dialog.setVisible(true);
+            }
         } else
             startButton.setHover(false);
 
@@ -141,6 +167,12 @@ public class Renderer extends Thread {
      */
     public void showGame(Graphics2D g2) {
 
+        // Colors
+        final Color DARK_YELLOW = new Color(0xF6BE00);
+        final Color DARK_RED = new Color(0x8B0000);
+        final Color ActivePlayer = Color.RED;
+        final Color InactivePlayer = Color.GRAY;
+
         if (this.gameRef.currentPlayer == null)
             this.gameRef.currentPlayer = this.gameRef.players.get(0);
 
@@ -168,139 +200,139 @@ public class Renderer extends Thread {
          * x-axis increments by 70
          */
         g2.setColor(Color.BLACK);
-        this.boxes[0].render(g2);
+        this.boxes[0].render(g2, "START");
 
-        g2.setColor(Color.BLUE); // set color // create object
-        this.boxes[1].render(g2); // draw object to screen
+        g2.setColor(DARK_YELLOW); // set color // create object
+        this.boxes[1].render(g2, "1"); // draw object to screen
 
-        g2.setColor(Color.RED);
-        this.boxes[2].render(g2);
+        g2.setColor(DARK_RED);
+        this.boxes[2].render(g2, "2");
 
-        g2.setColor(Color.BLUE);
-        this.boxes[3].render(g2);
+        g2.setColor(DARK_YELLOW);
+        this.boxes[3].render(g2, "3");
 
-        g2.setColor(Color.RED);
-        this.boxes[4].render(g2);
+        g2.setColor(DARK_RED);
+        this.boxes[4].render(g2, "4");
 
-        g2.setColor(Color.BLUE);
-        this.boxes[5].render(g2);
+        g2.setColor(DARK_YELLOW);
+        this.boxes[5].render(g2, "5");
 
-        g2.setColor(Color.RED);
-        this.boxes[6].render(g2);
+        g2.setColor(DARK_RED);
+        this.boxes[6].render(g2, "6");
 
-        g2.setColor(Color.BLUE);
-        this.boxes[7].render(g2);
+        g2.setColor(DARK_YELLOW);
+        this.boxes[7].render(g2, "7");
 
-        g2.setColor(Color.RED);
-        this.boxes[8].render(g2);
+        g2.setColor(DARK_RED);
+        this.boxes[8].render(g2, "8");
 
-        g2.setColor(Color.BLUE);
-        this.boxes[9].render(g2);
+        g2.setColor(DARK_YELLOW);
+        this.boxes[9].render(g2, "9");
 
         g2.setColor(Color.BLACK);
-        this.boxes[10].render(g2);
+        this.boxes[10].render(g2, "10");
 
         /**
          * Begins right/east side panel
          * y-axis increments by 68
          */
 
-        g2.setColor(Color.RED);
-        this.boxes[11].render(g2);
+        g2.setColor(DARK_RED);
+        this.boxes[11].render(g2, "11");
 
-        g2.setColor(Color.BLUE);
-        this.boxes[12].render(g2);
+        g2.setColor(DARK_YELLOW);
+        this.boxes[12].render(g2, "12");
 
-        g2.setColor(Color.RED);
-        this.boxes[13].render(g2);
+        g2.setColor(DARK_RED);
+        this.boxes[13].render(g2, "13");
 
-        g2.setColor(Color.BLUE);
-        this.boxes[14].render(g2);
+        g2.setColor(DARK_YELLOW);
+        this.boxes[14].render(g2, "14");
 
-        g2.setColor(Color.RED);
-        this.boxes[15].render(g2);
+        g2.setColor(DARK_RED);
+        this.boxes[15].render(g2, "15");
 
-        g2.setColor(Color.BLUE);
-        this.boxes[16].render(g2);
+        g2.setColor(DARK_YELLOW);
+        this.boxes[16].render(g2, "16");
 
-        g2.setColor(Color.RED);
-        this.boxes[17].render(g2);
+        g2.setColor(DARK_RED);
+        this.boxes[17].render(g2, "17");
 
-        g2.setColor(Color.BLUE);
-        this.boxes[18].render(g2);
+        g2.setColor(DARK_YELLOW);
+        this.boxes[18].render(g2, "18");
 
-        g2.setColor(Color.RED);
-        this.boxes[19].render(g2);
+        g2.setColor(DARK_RED);
+        this.boxes[19].render(g2, "19");
 
         g2.setColor(Color.BLACK);
-        this.boxes[20].render(g2);
+        this.boxes[20].render(g2, "20");
 
         /*
          * Beings bottom/south side panel
          * x-axis increments in 70
          */
 
-        g2.setColor(Color.BLUE);
-        this.boxes[21].render(g2);
+        g2.setColor(DARK_YELLOW);
+        this.boxes[21].render(g2, "21");
 
-        g2.setColor(Color.RED);
-        this.boxes[22].render(g2);
+        g2.setColor(DARK_RED);
+        this.boxes[22].render(g2, "22");
 
-        g2.setColor(Color.BLUE);
-        this.boxes[23].render(g2);
+        g2.setColor(DARK_YELLOW);
+        this.boxes[23].render(g2, "23");
 
-        g2.setColor(Color.RED);
-        this.boxes[24].render(g2);
+        g2.setColor(DARK_RED);
+        this.boxes[24].render(g2, "24");
 
-        g2.setColor(Color.BLUE);
-        this.boxes[25].render(g2);
+        g2.setColor(DARK_YELLOW);
+        this.boxes[25].render(g2, "25");
 
-        g2.setColor(Color.RED);
-        this.boxes[26].render(g2);
+        g2.setColor(DARK_RED);
+        this.boxes[26].render(g2, "26");
 
-        g2.setColor(Color.BLUE);
-        this.boxes[27].render(g2);
+        g2.setColor(DARK_YELLOW);
+        this.boxes[27].render(g2, "27");
 
-        g2.setColor(Color.RED);
-        this.boxes[28].render(g2);
+        g2.setColor(DARK_RED);
+        this.boxes[28].render(g2, "28");
 
-        g2.setColor(Color.BLUE);
-        this.boxes[29].render(g2);
+        g2.setColor(DARK_YELLOW);
+        this.boxes[29].render(g2, "29");
 
         g2.setColor(Color.BLACK);
-        this.boxes[30].render(g2);
+        this.boxes[30].render(g2, "30");
 
         /*
          * Begins the left/west side panel
          * y-axis increments by 68
          */
 
-        g2.setColor(Color.BLUE);
-        this.boxes[31].render(g2);
+        g2.setColor(DARK_YELLOW);
+        this.boxes[31].render(g2, "31");
 
-        g2.setColor(Color.RED);
-        this.boxes[32].render(g2);
+        g2.setColor(DARK_RED);
+        this.boxes[32].render(g2, "32");
 
-        g2.setColor(Color.BLUE);
-        this.boxes[33].render(g2);
+        g2.setColor(DARK_YELLOW);
+        this.boxes[33].render(g2, "33");
 
-        g2.setColor(Color.RED);
-        this.boxes[34].render(g2);
+        g2.setColor(DARK_RED);
+        this.boxes[34].render(g2, "34");
 
-        g2.setColor(Color.BLUE);
-        this.boxes[35].render(g2);
+        g2.setColor(DARK_YELLOW);
+        this.boxes[35].render(g2, "35");
 
-        g2.setColor(Color.RED);
-        this.boxes[36].render(g2);
+        g2.setColor(DARK_RED);
+        this.boxes[36].render(g2, "36");
 
-        g2.setColor(Color.BLUE);
-        this.boxes[37].render(g2);
+        g2.setColor(DARK_YELLOW);
+        this.boxes[37].render(g2, "37");
 
-        g2.setColor(Color.RED);
-        this.boxes[38].render(g2);
+        g2.setColor(DARK_RED);
+        this.boxes[38].render(g2, "38");
 
-        g2.setColor(Color.BLUE);
-        this.boxes[39].render(g2);
+        g2.setColor(DARK_YELLOW);
+        this.boxes[39].render(g2, "39");
 
         // Identifiers for game boxes
 
@@ -386,9 +418,6 @@ public class Renderer extends Thread {
                 if (player.getGameBox() == null)
                     player.setGameBox(boxes[0]);
 
-        Color ActivePlayer = Color.ORANGE;
-        Color InactivePlayer = Color.GREEN;
-
         for (Player player : this.gameRef.players)
             if (player != null) {
                 if (this.gameRef.currentPlayer == player)
@@ -401,6 +430,9 @@ public class Renderer extends Thread {
 
         g2.setColor(ActivePlayer);
         this.gameRef.currentPlayer.render(g2);
+
+        // g2.drawImage(Renderer.boardBackground, 43, 34, Color.WHITE, this.gameRef.display.getFocusCycleRootAncestor());
+        this.gameRef.currentPlayer.renderStats(g2, 43 + 65, 34 + 65); // Note: boxSize is 65
     }
 
     /**
@@ -459,10 +491,10 @@ public class Renderer extends Thread {
             case CURRENTLY_PLAYING:
                 this.showGame(g2);
                 break;
-            case GAME_SETUP:
-                // this.showSetUp(g2);
-                this.showGame(g2);
-                break;
+            // case GAME_SETUP: (DEPRECATED)
+            //     // this.showSetUp(g2);
+            //     this.showGame(g2);
+            //     break;
             case SPLASH_SCREEN:
             default:
                 this.showSplash(g2);

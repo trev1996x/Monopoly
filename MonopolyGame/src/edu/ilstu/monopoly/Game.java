@@ -54,11 +54,11 @@ public class Game {
 			renderer.boxes[i] = new GameBox(horizontalOffset + boxSize * 10, verticalOffset + boxSize * (i - 10), boxSize);
 
 		// generate bottom 11
-		for(int i = 20; i < 31; i++)
+		for(int i = 20; i < 31; i++) // order of this doesn't matter ig :(
 		renderer.boxes[i] = new GameBox(horizontalOffset + boxSize * (i - 20), verticalOffset + boxSize * 10, boxSize);
 
 		// generate left 9
-		for(int i = 31; i < 40; i++)
+		for(int i = 39; i >= 31; i--)
 			renderer.boxes[i] = new GameBox(horizontalOffset, verticalOffset + boxSize * (i - 30), boxSize);
 
 		// for(int i = 0; i < renderer.boxes.length; i++) if(renderer.boxes[i] == null) renderer.boxes[i] = new GameBox(0, 0, 0);
@@ -100,7 +100,7 @@ public class Game {
 	 * Start the game
 	 */
 	public void startPlaying() {
-		this.status = GameStatus.GAME_SETUP;
+		this.status = GameStatus.CURRENTLY_PLAYING;
 	}
 
 	/**
@@ -124,7 +124,7 @@ public class Game {
 
 	public enum GameStatus {
 		SPLASH_SCREEN,
-		GAME_SETUP,
+		// GAME_SETUP, (DEPRECATED)
 		CURRENTLY_PLAYING
 	}
 

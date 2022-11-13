@@ -3,6 +3,10 @@ package edu.ilstu.monopoly.items;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 
 import edu.ilstu.monopoly.Renderable;
 
@@ -18,6 +22,20 @@ public class GameBox extends Renderable {
 
         g2.fillRect(this.x, this.y, this.width, this.height);
 
+    }
+
+    public void render(Graphics2D g2, String label) {
+
+        g2.fillRect(this.x, this.y, this.width, this.height);
+
+        g2.setColor(Color.WHITE);
+
+        g2.setFont(new Font("Verdana", Font.BOLD, 12));
+        FontMetrics fm = g2.getFontMetrics();
+
+        Rectangle2D strBounds = fm.getStringBounds(label, g2);
+
+        g2.drawString(label, this.x + (int)(.5 * this.width - .5 * strBounds.getWidth()), y + fm.getAscent() + (int)(.5 * this.height - .5 * strBounds.getHeight()));
     }
 
     @Override
