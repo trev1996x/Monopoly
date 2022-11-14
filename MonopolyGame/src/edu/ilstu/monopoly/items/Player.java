@@ -89,15 +89,33 @@ public class Player extends Renderable {
         }
     }
 
+    public int getMoney() {
+        return this.money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public void addMoney (int toAdd) {
+        this.money += toAdd;
+    }
+
+    public void subMoney (int toRem) {
+        this.money -= toRem;
+    }
+
     /**
      * To change player stats, use this method!
      * @return Player Stats in String form
      */
     public String getStats() {
         return new String(
-            "Player " + Integer.toString(this.identifier) + " stats: \nPoints: 100\nGo-Arounds: 1"
+            "Player " + Integer.toString(this.identifier) + " stats: \nMoney: $" + this.money
         );
     }
+
+    private int money = 1_000;
 
     private int identifier = -1;
 }

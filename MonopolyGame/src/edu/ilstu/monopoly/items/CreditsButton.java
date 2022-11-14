@@ -98,7 +98,7 @@ public class CreditsButton extends Renderable {
         this.infoBox.setLayout(layout);
 
         JLabel credits = new JLabel("Created for IT 178.");
-        JLabel copyright = new JLabel("(C) 2022 Ty Qualters, Trevor Leamon, and Joe Fangu.");
+        JLabel copyright = new JLabel("(C) 2022 Ty Qualters, Trevor Leamon, and Joel Fangu.");
 
         this.infoBox.add(credits);
         this.infoBox.add(copyright);

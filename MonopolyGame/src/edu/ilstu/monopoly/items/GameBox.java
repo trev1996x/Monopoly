@@ -33,9 +33,16 @@ public class GameBox extends Renderable {
         g2.setFont(new Font("Verdana", Font.BOLD, 12));
         FontMetrics fm = g2.getFontMetrics();
 
-        Rectangle2D strBounds = fm.getStringBounds(label, g2);
-
-        g2.drawString(label, this.x + (int)(.5 * this.width - .5 * strBounds.getWidth()), y + fm.getAscent() + (int)(.5 * this.height - .5 * strBounds.getHeight()));
+        int _y = this.y;
+        for(String line : label.split("\n"))
+        {
+            Rectangle2D bounds = fm.getStringBounds(line, g2);
+            g2.setColor(Color.WHITE);
+            g2.drawString(line,
+            this.x + (int)(.5 * this.width - .5 * bounds.getWidth()),
+            _y + fm.getAscent() + (int)(.5 * this.height - .5 * bounds.getHeight()));
+            _y += (int)bounds.getHeight() + 4;
+        }
     }
 
     @Override
