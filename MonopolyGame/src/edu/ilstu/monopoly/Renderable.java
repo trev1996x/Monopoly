@@ -1,4 +1,11 @@
+/**
+ * ULID: tmqualt, tjleamo, jfangu
+ * Date: 20221114
+ */
 package edu.ilstu.monopoly;
+/**
+ * Abstract class for a renderable object
+ */
 
 import java.awt.Point;
 
@@ -22,24 +29,28 @@ public abstract class Renderable implements IRenderable {
 		this.y = y;
 	}
 	
+	/**
+	 * Get the X location of the renderable object
+	 * @return int
+	 */
 	public int getX() {
 		return this.x;
 	}
 	
+	/**
+	 * Get the Y location of the renderable object
+	 * @return int
+	 */
 	public int getY() {
 		return this.y;
 	}
 	
+	/**
+	 * Get the points of the renderable object
+	 * @return Point
+	 */
 	public Point getPoint() {
 		return new Point(this.x, this.y);
-	}
-	
-	public void setZIndex(int zIndex) {
-		this.zIndex = zIndex;
-	}
-	
-	public int getZIndex() {
-		return this.zIndex;
 	}
 	
 	protected int x;

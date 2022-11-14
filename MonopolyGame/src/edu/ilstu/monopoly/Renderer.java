@@ -1,4 +1,11 @@
+/**
+ * ULID: tmqualt, tjleamo, jfangu
+ * Date: 20221114
+ */
 package edu.ilstu.monopoly;
+/**
+ * The main class for rendering the game
+ */
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
@@ -44,6 +51,15 @@ public class Renderer extends Thread {
 
     public static Image goToJailBackground = null;
 
+    /**
+     * Draw an image to the Graphics 2D
+     * @param g2 Graphics2D
+     * @param image BufferedImage
+     * @param imgSrc Location of the image
+     * @param imgSize Dimensions of the image
+     * @param x x Location
+     * @param y y Location
+     */
     public void drawImage(Graphics2D g2, BufferedImage image, String imgSrc, Dimension imgSize, int x, int y) {
         g2.drawImage(
                 image,
@@ -51,6 +67,14 @@ public class Renderer extends Thread {
                 this.gameRef.display.getFocusCycleRootAncestor());
     }
 
+    /**
+     * Draw an image to the Graphics 2D
+     * @param g2 Graphics2D
+     * @param imgSrc Location of the image
+     * @param imgSize Dimensions of the image
+     * @param x x Location
+     * @param y y Location
+     */
     public void drawImage(Graphics2D g2, String imgSrc, Dimension imgSize, int x, int y) {
         try {
             g2.drawImage(
@@ -63,6 +87,15 @@ public class Renderer extends Thread {
         }
     }
 
+    /**
+     * Draw an image to the Graphics 2D
+     * @param g2 Graphics2D
+     * @param imgSrc Location of the image
+     * @param width Width of the image
+     * @param height Height of the image
+     * @param x x Location
+     * @param y y Location
+     */
     public void drawImage(Graphics2D g2, String imgSrc, int width, int height, int x, int y) {
         drawImage(g2, imgSrc, new Dimension(width, height), x, y);
     }
@@ -130,6 +163,15 @@ public class Renderer extends Thread {
 
     }
 
+    /**
+     * Draw text to a Graphics 2D
+     * @param g2 Graphics2D
+     * @param text The text to render
+     * @param color The color of the text
+     * @param fontSize The size of the text
+     * @param x x Location
+     * @param y y Location
+     */
     public static void drawLabel(Graphics2D g2, String text, Color color, int fontSize, int x, int y) {
         FontMetrics fm;
         g2.setFont(new Font("Arial", Font.BOLD, fontSize));

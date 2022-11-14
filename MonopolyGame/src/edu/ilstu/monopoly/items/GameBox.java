@@ -1,4 +1,11 @@
+/**
+ * ULID: tmqualt, tjleamo, jfangu
+ * Date: 20221114
+ */
 package edu.ilstu.monopoly.items;
+/**
+ * A game tile for the Monopoly board
+ */
 
 import java.awt.Graphics2D;
 import java.awt.Point;

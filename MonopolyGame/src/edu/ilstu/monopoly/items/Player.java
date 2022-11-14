@@ -1,4 +1,11 @@
+/**
+ * ULID: tmqualt, tjleamo, jfangu
+ * Date: 20221114
+ */
 package edu.ilstu.monopoly.items;
+/**
+ * A renderable object representing a player of the game
+ */
 
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
@@ -56,10 +63,18 @@ public class Player extends Renderable {
         return false;
     }
 
+    /**
+     * Set the game box
+     * @param newBox new Game box
+     */
     public void setGameBox(GameBox newBox) {
         this.owner = newBox;
     }
 
+    /*
+     * Get the game box
+     * @return Game box
+     */
     public GameBox getGameBox() {
         return this.owner;
     }
@@ -69,6 +84,12 @@ public class Player extends Renderable {
 
     private GameBox owner;
 
+    /**
+     * Draw the player stats to screen
+     * @param g2 Graphics2D
+     * @param x x Location
+     * @param y y Location
+     */
     public void renderStats(Graphics2D g2, int x, int y) {
         g2.setFont(new Font("Arial", Font.BOLD, 24));
         FontMetrics fm = g2.getFontMetrics();
@@ -89,18 +110,34 @@ public class Player extends Renderable {
         }
     }
 
+    /**
+     * Get the money
+     * @return int
+     */
     public int getMoney() {
         return this.money;
     }
 
+    /**
+     * Set the money
+     * @param money int
+     */
     public void setMoney(int money) {
         this.money = money;
     }
 
+    /**
+     * Add to money
+     * @param toAdd int
+     */
     public void addMoney (int toAdd) {
         this.money += toAdd;
     }
 
+    /**
+     * Subtract from money
+     * @param toRem int
+     */
     public void subMoney (int toRem) {
         this.money -= toRem;
     }

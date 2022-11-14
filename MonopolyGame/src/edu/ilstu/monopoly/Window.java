@@ -1,4 +1,11 @@
+/**
+ * ULID: tmqualt, tjleamo, jfangu
+ * Date: 20221114
+ */
 package edu.ilstu.monopoly;
+/**
+ * The main JFrame
+ */
 
 import java.awt.Dimension;
 import javax.swing.JFrame;

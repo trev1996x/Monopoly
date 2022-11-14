@@ -1,4 +1,11 @@
+/**
+ * ULID: tmqualt, tjleamo, jfangu
+ * Date: 20221114
+ */
 package edu.ilstu.monopoly;
+/**
+ * The main game class (holds static game data)
+ */
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;

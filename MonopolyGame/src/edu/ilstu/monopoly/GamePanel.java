@@ -1,4 +1,11 @@
+/**
+ * ULID: tmqualt, tjleamo, jfangu
+ * Date: 20221114
+ */
 package edu.ilstu.monopoly;
+/**
+ * The JPanel that the game will render to
+ */
 
 import java.awt.Graphics;
 import java.awt.Point;
@@ -65,10 +72,17 @@ public class GamePanel extends JPanel /* implements MouseInputListener */ {
 		return this.mousePos;
 	}
 
+	/**
+	 * Check if the mouse was clicked
+	 * @return Mouse clicked
+	 */
 	public boolean getMouseClicked() {
 		return this.mouseClicked;
 	}
 
+	/**
+	 * Reset the mouse status
+	 */
 	public void resetMouseClicked() {
 		this.mouseClicked = false;
 	}

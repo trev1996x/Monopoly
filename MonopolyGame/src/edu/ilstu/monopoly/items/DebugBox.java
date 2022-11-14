@@ -1,4 +1,11 @@
+/**
+ * ULID: tmqualt, tjleamo, jfangu
+ * Date: 20221114
+ */
 package edu.ilstu.monopoly.items;
+/**
+ * A renderable object intended for testing purposes
+ */
 
 import java.awt.Color;
 import java.awt.Font;

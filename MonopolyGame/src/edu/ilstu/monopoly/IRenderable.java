@@ -1,4 +1,11 @@
+/**
+ * ULID: tmqualt, tjleamo, jfangu
+ * Date: 20221114
+ */
 package edu.ilstu.monopoly;
+/**
+ * Abstract interface for a renderable object
+ */
 
 import java.awt.Graphics2D;
 import java.awt.Point;
