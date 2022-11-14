@@ -38,9 +38,9 @@ public class Player extends Renderable {
         FontMetrics fm = g2.getFontMetrics();
 
         g2.drawString(Integer.toString(this.identifier),
-                this.owner.getX() + 33
+                this.owner.getX() + 42 // hardset value
                         - ((int) fm.getStringBounds(Integer.toString(this.identifier), g2).getWidth() / 2),
-                fm.getDescent() + this.owner.getY() + 37);
+                fm.getDescent() + this.owner.getY() + 45); // hardset value
     }
 
     /*

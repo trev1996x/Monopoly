@@ -15,10 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
-
-import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.imageio.ImageIO;
 
 import edu.ilstu.monopoly.items.*;
@@ -80,27 +77,6 @@ public class Renderer extends Thread {
             if (mouseClicked)
             {
                 this.gameRef.startPlaying();
-                JDialog dialog = new JDialog(this.gameRef.mainWindow);
-                dialog.setTitle("Woah there!");
-                java.awt.FlowLayout layout = new java.awt.FlowLayout();
-                layout.setAlignment(0);
-                dialog.setLayout(layout);
-                Font font = new Font("Arial", Font.BOLD, 20);
-                JLabel label = new JLabel("As you may be able to tell after closing this dialog, something just ain't right...");
-                label.setFont(font);
-                JLabel label2 = new JLabel("If you can't seem to figure it out, try taking a look at the numbers...");
-                label2.setFont(font);
-                JLabel label3 = new JLabel("Yeah, that's a TODO task.");
-                label3.setFont(font);
-                dialog.add(label);
-                dialog.add(label2);
-                dialog.add(label3);
-                dialog.setModal(true);
-                dialog.setLocationRelativeTo(null);
-                dialog.setSize(new Dimension(800,150));
-                dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-                dialog.setResizable(false);
-                dialog.setVisible(true);
             }
         } else
             startButton.setHover(false);
@@ -191,8 +167,8 @@ public class Renderer extends Thread {
 
         // hardcoded board background
         g2.setColor(Color.GRAY);
-        g2.fillRect(43, 34, 65 * 11, 65 * 11); // area = 715x715
-        g2.drawImage(Renderer.boardBackground, 43, 34, Color.WHITE, this.gameRef.display.getFocusCycleRootAncestor());
+        g2.fillRect(horizontalOffset, verticalOffset, boxSize * 11, boxSize * 11); // area = 715x715
+        g2.drawImage(Renderer.boardBackground, horizontalOffset, verticalOffset, Color.WHITE, this.gameRef.display.getFocusCycleRootAncestor());
         // this.drawImage(g2, "background.png", new Dimension(715,715), 43, 34);
 
         /**
@@ -339,7 +315,7 @@ public class Renderer extends Thread {
         if (this.diceRoll == null)
         {
             diceRoll = new DiceRoll(200, 200);
-            diceRoll.setLocation(400 - (int)diceRoll.getBounds().getWidth() / 2, 600 - (int)diceRoll.getBounds().getHeight() / 2);
+            diceRoll.setLocation((this.gameRef.mainWindow.getWidth() / 2) - (int)diceRoll.getBounds().getWidth() / 2, 800 - (int)diceRoll.getBounds().getHeight() / 2);
         }
         this.diceRoll.rollDice();
         if (this.diceRolling && this.diceRoll.done_iterating) {
@@ -432,7 +408,7 @@ public class Renderer extends Thread {
         this.gameRef.currentPlayer.render(g2);
 
         // g2.drawImage(Renderer.boardBackground, 43, 34, Color.WHITE, this.gameRef.display.getFocusCycleRootAncestor());
-        this.gameRef.currentPlayer.renderStats(g2, 43 + 65, 34 + 65); // Note: boxSize is 65
+        this.gameRef.currentPlayer.renderStats(g2, horizontalOffset + boxSize, verticalOffset + boxSize); // Note: boxSize is 65
     }
 
     /**
@@ -473,7 +449,7 @@ public class Renderer extends Thread {
         if(Renderer.boardBackground == null)
         {
             try {
-                Renderer.boardBackground = ImageIO.read(new File("resources/background.png")).getScaledInstance(715, 715,
+                Renderer.boardBackground = ImageIO.read(new File("resources/background.png")).getScaledInstance(boxSize * 11, boxSize * 11,
                             Image.SCALE_DEFAULT);
                 System.out.println("Imported resources/background.png");
             } catch(IOException ioe) {
@@ -560,6 +536,8 @@ public class Renderer extends Thread {
     private DiceRoll diceRoll;
 
     private boolean diceRolling = false;
+
+    public int verticalOffset = 0, horizontalOffset = 0, boxSize = 0;
 
     protected GameBox boxes[] = new GameBox[40];
 

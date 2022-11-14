@@ -43,7 +43,12 @@ public class Game {
 		Renderer renderer = new Renderer();
 		renderer.setGame(this);
 
-		int boxSize = 65, verticalOffset = 34, horizontalOffset = 43;
+		final int windowWidth = this.mainWindow.getWidth(), 
+			windowHeight = this.mainWindow.getHeight();
+
+		// 11, 11, 11, 11
+
+		int boxSize = 85, verticalOffset = (int)(((windowHeight - 18) - (11 * boxSize))/2), horizontalOffset = (int)(((windowWidth) - (11 * boxSize))/2);
 
 		// generate top 11
 		for(int i = 0; i < 11; i++)
@@ -54,14 +59,19 @@ public class Game {
 			renderer.boxes[i] = new GameBox(horizontalOffset + boxSize * 10, verticalOffset + boxSize * (i - 10), boxSize);
 
 		// generate bottom 11
-		for(int i = 20; i < 31; i++) // order of this doesn't matter ig :(
-		renderer.boxes[i] = new GameBox(horizontalOffset + boxSize * (i - 20), verticalOffset + boxSize * 10, boxSize);
+		for(int i = 20, j = 0; i < 31; i++, j++)
+		renderer.boxes[i] = new GameBox(horizontalOffset + boxSize * (10 - j), verticalOffset + boxSize * 10, boxSize);
 
 		// generate left 9
-		for(int i = 39; i >= 31; i--)
-			renderer.boxes[i] = new GameBox(horizontalOffset, verticalOffset + boxSize * (i - 30), boxSize);
+		for (int i = 31, j = 0; i < 40; i++, j++)
+			renderer.boxes[i] = new GameBox(horizontalOffset, verticalOffset + boxSize * (9 - j), boxSize);
 
 		// for(int i = 0; i < renderer.boxes.length; i++) if(renderer.boxes[i] == null) renderer.boxes[i] = new GameBox(0, 0, 0);
+
+		// pass along variables
+		renderer.verticalOffset = verticalOffset;
+		renderer.horizontalOffset = horizontalOffset;
+		renderer.boxSize = boxSize;
 
 		// While the JPanel can display something, keep rendering.
 		while (this.display.isDisplayable()) {

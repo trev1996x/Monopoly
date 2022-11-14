@@ -18,7 +18,7 @@ public class Window extends JFrame {
 		super.setIconImage(Toolkit.getDefaultToolkit().getImage("resources/favicon.png")); // set favicon // https://ecomputernotes.com/java/awt-and-applets/toolkit-getdefaulttoolkit-getimage
 		super.setAlwaysOnTop(true); // always on top of other apps
 		super.setDefaultCloseOperation(DISPOSE_ON_CLOSE); // don't exit on close, allow for clean up
-		Dimension defaultDimension = new Dimension(800, 800); // set default window size
+		Dimension defaultDimension = new Dimension(1000, 1000); // set default window size
 		super.setSize(defaultDimension);
 		super.setPreferredSize(defaultDimension);
 		super.setResizable(false); // allow the window to be resized
