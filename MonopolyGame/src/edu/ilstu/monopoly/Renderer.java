@@ -3,6 +3,7 @@
  * Date: 20221114
  */
 package edu.ilstu.monopoly;
+
 /**
  * The main class for rendering the game
  */
@@ -53,12 +54,13 @@ public class Renderer extends Thread {
 
     /**
      * Draw an image to the Graphics 2D
-     * @param g2 Graphics2D
-     * @param image BufferedImage
-     * @param imgSrc Location of the image
+     * 
+     * @param g2      Graphics2D
+     * @param image   BufferedImage
+     * @param imgSrc  Location of the image
      * @param imgSize Dimensions of the image
-     * @param x x Location
-     * @param y y Location
+     * @param x       x Location
+     * @param y       y Location
      */
     public void drawImage(Graphics2D g2, BufferedImage image, String imgSrc, Dimension imgSize, int x, int y) {
         g2.drawImage(
@@ -69,11 +71,12 @@ public class Renderer extends Thread {
 
     /**
      * Draw an image to the Graphics 2D
-     * @param g2 Graphics2D
-     * @param imgSrc Location of the image
+     * 
+     * @param g2      Graphics2D
+     * @param imgSrc  Location of the image
      * @param imgSize Dimensions of the image
-     * @param x x Location
-     * @param y y Location
+     * @param x       x Location
+     * @param y       y Location
      */
     public void drawImage(Graphics2D g2, String imgSrc, Dimension imgSize, int x, int y) {
         try {
@@ -89,12 +92,13 @@ public class Renderer extends Thread {
 
     /**
      * Draw an image to the Graphics 2D
-     * @param g2 Graphics2D
+     * 
+     * @param g2     Graphics2D
      * @param imgSrc Location of the image
-     * @param width Width of the image
+     * @param width  Width of the image
      * @param height Height of the image
-     * @param x x Location
-     * @param y y Location
+     * @param x      x Location
+     * @param y      y Location
      */
     public void drawImage(Graphics2D g2, String imgSrc, int width, int height, int x, int y) {
         drawImage(g2, imgSrc, new Dimension(width, height), x, y);
@@ -125,27 +129,27 @@ public class Renderer extends Thread {
 
         if (startButton.isMouseHovering(mousePos)) {
             startButton.setHover(true);
-            if (mouseClicked)
-            {
+            if (mouseClicked) {
                 this.gameRef.startPlaying();
             }
         } else
             startButton.setHover(false);
 
-            startButton.render(g2);
+        startButton.render(g2);
 
-            InstructionsButton instructionsButton = new InstructionsButton((this.frame.getWidth() / 2), 375);
-    
-            instructionsButton.setLocation(instructionsButton.getX() - (instructionsButton.getBounds().width / 2), instructionsButton.getY());
-    
-            if (instructionsButton.isMouseHovering(mousePos)) {
-                instructionsButton.setHover(true);
-                if (mouseClicked)
+        InstructionsButton instructionsButton = new InstructionsButton((this.frame.getWidth() / 2), 375);
+
+        instructionsButton.setLocation(instructionsButton.getX() - (instructionsButton.getBounds().width / 2),
+                instructionsButton.getY());
+
+        if (instructionsButton.isMouseHovering(mousePos)) {
+            instructionsButton.setHover(true);
+            if (mouseClicked)
                 instructionsButton.showInfoBox((JFrame) this.gameRef.mainWindow);
-            } else
+        } else
             instructionsButton.setHover(false);
-    
-            instructionsButton.render(g2);
+
+        instructionsButton.render(g2);
 
         CreditsButton creditsButton = new CreditsButton((this.frame.getWidth() / 2), 460);
 
@@ -160,17 +164,17 @@ public class Renderer extends Thread {
 
         creditsButton.render(g2);
 
-
     }
 
     /**
      * Draw text to a Graphics 2D
-     * @param g2 Graphics2D
-     * @param text The text to render
-     * @param color The color of the text
+     * 
+     * @param g2       Graphics2D
+     * @param text     The text to render
+     * @param color    The color of the text
      * @param fontSize The size of the text
-     * @param x x Location
-     * @param y y Location
+     * @param x        x Location
+     * @param y        y Location
      */
     public static void drawLabel(Graphics2D g2, String text, Color color, int fontSize, int x, int y) {
         FontMetrics fm;
@@ -223,12 +227,13 @@ public class Renderer extends Thread {
         // box.render(g2);
 
         // int frameWidth = this.frame.getWidth(),
-        //         frameHeight = this.frame.getHeight() - 20;
+        // frameHeight = this.frame.getHeight() - 20;
 
         // hardcoded board background
         g2.setColor(Color.GRAY);
         g2.fillRect(horizontalOffset, verticalOffset, boxSize * 11, boxSize * 11); // area = 715x715
-        g2.drawImage(Renderer.boardBackground, horizontalOffset, verticalOffset, Color.WHITE, this.gameRef.display.getFocusCycleRootAncestor());
+        g2.drawImage(Renderer.boardBackground, horizontalOffset, verticalOffset, Color.WHITE,
+                this.gameRef.display.getFocusCycleRootAncestor());
         // this.drawImage(g2, "background.png", new Dimension(715,715), 43, 34);
 
         /**
@@ -249,20 +254,21 @@ public class Renderer extends Thread {
 
         g2.setColor(DARK_RED);
         this.boxes[4].render(g2, "Community\nChest");
-        g2.drawImage(Renderer.commChestBackground, this.boxes[4].getX(), this.boxes[4].getY(), Color.WHITE, this.gameRef.display.getFocusCycleRootAncestor());
-
+        g2.drawImage(Renderer.commChestBackground, this.boxes[4].getX(), this.boxes[4].getY(), Color.WHITE,
+                this.gameRef.display.getFocusCycleRootAncestor());
 
         g2.setColor(DARK_YELLOW);
         this.boxes[5].render(g2, "Watterson");
-        g2.drawImage(Renderer.wattyBackground, this.boxes[5].getX(), this.boxes[5].getY(), Color.WHITE, this.gameRef.display.getFocusCycleRootAncestor());
+        g2.drawImage(Renderer.wattyBackground, this.boxes[5].getX(), this.boxes[5].getY(), Color.WHITE,
+                this.gameRef.display.getFocusCycleRootAncestor());
 
         g2.setColor(DARK_RED);
         this.boxes[6].render(g2, "Fairchild Hall");
 
         g2.setColor(DARK_YELLOW);
         this.boxes[7].render(g2, "Chance");
-        g2.drawImage(Renderer.chanceBackground, this.boxes[7].getX(), this.boxes[7].getY(), Color.WHITE, this.gameRef.display.getFocusCycleRootAncestor());
-
+        g2.drawImage(Renderer.chanceBackground, this.boxes[7].getX(), this.boxes[7].getY(), Color.WHITE,
+                this.gameRef.display.getFocusCycleRootAncestor());
 
         g2.setColor(DARK_RED);
         this.boxes[8].render(g2, "Cook Hall");
@@ -272,7 +278,8 @@ public class Renderer extends Thread {
 
         g2.setColor(Color.BLACK);
         this.boxes[10].render(g2, "Jail");
-        g2.drawImage(Renderer.isupdBackground, this.boxes[10].getX(), this.boxes[10].getY(), Color.WHITE, this.gameRef.display.getFocusCycleRootAncestor());
+        g2.drawImage(Renderer.isupdBackground, this.boxes[10].getX(), this.boxes[10].getY(), Color.WHITE,
+                this.gameRef.display.getFocusCycleRootAncestor());
 
         /**
          * Begins right/east side panel
@@ -284,7 +291,8 @@ public class Renderer extends Thread {
 
         g2.setColor(DARK_YELLOW);
         this.boxes[12].render(g2, "Chance");
-        g2.drawImage(Renderer.chanceBackground, this.boxes[12].getX(), this.boxes[12].getY(), Color.WHITE, this.gameRef.display.getFocusCycleRootAncestor());
+        g2.drawImage(Renderer.chanceBackground, this.boxes[12].getX(), this.boxes[12].getY(), Color.WHITE,
+                this.gameRef.display.getFocusCycleRootAncestor());
 
         g2.setColor(DARK_RED);
         this.boxes[13].render(g2, "McCormick\nHall");
@@ -294,7 +302,8 @@ public class Renderer extends Thread {
 
         g2.setColor(DARK_RED);
         this.boxes[15].render(g2, "Hewett\nManchester");
-        g2.drawImage(Renderer.hewittBackground, this.boxes[15].getX(), this.boxes[15].getY(), Color.WHITE, this.gameRef.display.getFocusCycleRootAncestor());
+        g2.drawImage(Renderer.hewittBackground, this.boxes[15].getX(), this.boxes[15].getY(), Color.WHITE,
+                this.gameRef.display.getFocusCycleRootAncestor());
 
         g2.setColor(DARK_YELLOW);
         this.boxes[16].render(g2, "State Farm\nHall");
@@ -310,8 +319,8 @@ public class Renderer extends Thread {
 
         g2.setColor(Color.BLACK);
         this.boxes[20].render(g2, "Go to\nJail");
-        g2.drawImage(Renderer.goToJailBackground, this.boxes[20].getX(), this.boxes[20].getY(), Color.WHITE, this.gameRef.display.getFocusCycleRootAncestor());
-
+        g2.drawImage(Renderer.goToJailBackground, this.boxes[20].getX(), this.boxes[20].getY(), Color.WHITE,
+                this.gameRef.display.getFocusCycleRootAncestor());
 
         /*
          * Beings bottom/south side panel
@@ -332,15 +341,16 @@ public class Renderer extends Thread {
 
         g2.setColor(DARK_YELLOW);
         this.boxes[25].render(g2, "Tri Towers");
-        g2.drawImage(Renderer.triBackground, this.boxes[25].getX(), this.boxes[25].getY(), Color.WHITE, this.gameRef.display.getFocusCycleRootAncestor());
+        g2.drawImage(Renderer.triBackground, this.boxes[25].getX(), this.boxes[25].getY(), Color.WHITE,
+                this.gameRef.display.getFocusCycleRootAncestor());
 
         g2.setColor(DARK_RED);
         this.boxes[26].render(g2, "Bone Center");
 
         g2.setColor(DARK_YELLOW);
         this.boxes[27].render(g2, "Community\nChest");
-        g2.drawImage(Renderer.commChestBackground, this.boxes[27].getX(), this.boxes[27].getY(), Color.WHITE, this.gameRef.display.getFocusCycleRootAncestor());
-
+        g2.drawImage(Renderer.commChestBackground, this.boxes[27].getX(), this.boxes[27].getY(), Color.WHITE,
+                this.gameRef.display.getFocusCycleRootAncestor());
 
         g2.setColor(DARK_RED);
         this.boxes[28].render(g2, "Uptown");
@@ -350,8 +360,8 @@ public class Renderer extends Thread {
 
         g2.setColor(Color.BLACK);
         this.boxes[30].render(g2, "Free Parking");
-        g2.drawImage(Renderer.freeParkingBackground, this.boxes[30].getX(), this.boxes[30].getY(), Color.WHITE, this.gameRef.display.getFocusCycleRootAncestor());
-
+        g2.drawImage(Renderer.freeParkingBackground, this.boxes[30].getX(), this.boxes[30].getY(), Color.WHITE,
+                this.gameRef.display.getFocusCycleRootAncestor());
 
         /*
          * Begins the left/west side panel
@@ -372,7 +382,8 @@ public class Renderer extends Thread {
 
         g2.setColor(DARK_YELLOW);
         this.boxes[35].render(g2, "Cardinal Court");
-        g2.drawImage(Renderer.cardinalBackground, this.boxes[35].getX(), this.boxes[35].getY(), Color.WHITE, this.gameRef.display.getFocusCycleRootAncestor());
+        g2.drawImage(Renderer.cardinalBackground, this.boxes[35].getX(), this.boxes[35].getY(), Color.WHITE,
+                this.gameRef.display.getFocusCycleRootAncestor());
 
         g2.setColor(DARK_RED);
         this.boxes[36].render(g2, "Lot S103\n:(( </3");
@@ -388,16 +399,16 @@ public class Renderer extends Thread {
 
         // Identifiers for game boxes
 
-        if (this.diceRoll == null)
-        {
+        if (this.diceRoll == null) {
             diceRoll = new DiceRoll(200, 200);
-            diceRoll.setLocation((this.gameRef.mainWindow.getWidth() / 2) - (int)diceRoll.getBounds().getWidth() / 2, 800 - (int)diceRoll.getBounds().getHeight() / 2);
+            diceRoll.setLocation((this.gameRef.mainWindow.getWidth() / 2) - (int) diceRoll.getBounds().getWidth() / 2,
+                    800 - (int) diceRoll.getBounds().getHeight() / 2);
         }
         this.diceRoll.rollDice();
         if (this.diceRolling && this.diceRoll.done_iterating) {
             // Dice done rolling!!
             // We need to update the game accordingly..
-            // 
+            //
 
             // Create a reference to the old player
             Player oldPlayer = this.gameRef.currentPlayer;
@@ -449,8 +460,7 @@ public class Renderer extends Thread {
 
             this.diceRolling = false; // reset
         }
-        if (this.diceRoll.isMouseHovering(mousePos))
-        {
+        if (this.diceRoll.isMouseHovering(mousePos)) {
             if (this.mouseClicked) {
                 this.diceRoll.startRoll();
                 this.diceRolling = true;
@@ -483,8 +493,11 @@ public class Renderer extends Thread {
         g2.setColor(ActivePlayer);
         this.gameRef.currentPlayer.render(g2);
 
-        // g2.drawImage(Renderer.boardBackground, 43, 34, Color.WHITE, this.gameRef.display.getFocusCycleRootAncestor());
-        this.gameRef.currentPlayer.renderStats(g2, horizontalOffset + boxSize, verticalOffset + boxSize); // Note: boxSize is 65
+        // g2.drawImage(Renderer.boardBackground, 43, 34, Color.WHITE,
+        // this.gameRef.display.getFocusCycleRootAncestor());
+        this.gameRef.currentPlayer.renderStats(g2, horizontalOffset + boxSize, verticalOffset + boxSize); // Note:
+                                                                                                          // boxSize is
+                                                                                                          // 65
     }
 
     /**
@@ -522,104 +535,99 @@ public class Renderer extends Thread {
     public void run() {
 
         // preload IO
-        if(Renderer.boardBackground == null)
-        {
+        if (Renderer.boardBackground == null) {
             try {
-                Renderer.boardBackground = ImageIO.read(new File("resources/background.png")).getScaledInstance(boxSize * 11, boxSize * 11,
-                            Image.SCALE_DEFAULT);
+                Renderer.boardBackground = ImageIO.read(new File("resources/background.png")).getScaledInstance(
+                        boxSize * 11, boxSize * 11,
+                        Image.SCALE_DEFAULT);
                 System.out.println("Imported resources/background.png");
-            } catch(IOException ioe) {
+            } catch (IOException ioe) {
                 ioe.printStackTrace();
             }
         }
-        if(Renderer.wattyBackground == null)
-        {
+        if (Renderer.wattyBackground == null) {
             try {
                 Renderer.wattyBackground = ImageIO.read(new File("resources/Watty.png")).getScaledInstance(85, 85,
-                            Image.SCALE_DEFAULT);
+                        Image.SCALE_DEFAULT);
                 System.out.println("Imported resources/Watty.png");
-            } catch(IOException ioe) {
+            } catch (IOException ioe) {
                 ioe.printStackTrace();
             }
         }
-        if(Renderer.cardinalBackground == null)
-        {
+        if (Renderer.cardinalBackground == null) {
             try {
-                Renderer.cardinalBackground = ImageIO.read(new File("resources/CardinalCourt.png")).getScaledInstance(85, 85,
-                            Image.SCALE_DEFAULT);
+                Renderer.cardinalBackground = ImageIO.read(new File("resources/CardinalCourt.png")).getScaledInstance(
+                        85, 85,
+                        Image.SCALE_DEFAULT);
                 System.out.println("Imported resources/CardinalCourt.png");
-            } catch(IOException ioe) {
+            } catch (IOException ioe) {
                 ioe.printStackTrace();
             }
         }
-        if(Renderer.hewittBackground == null)
-        {
+        if (Renderer.hewittBackground == null) {
             try {
-                Renderer.hewittBackground = ImageIO.read(new File("resources/HewittManchester.png")).getScaledInstance(85, 85,
-                            Image.SCALE_DEFAULT);
+                Renderer.hewittBackground = ImageIO.read(new File("resources/HewittManchester.png")).getScaledInstance(
+                        85, 85,
+                        Image.SCALE_DEFAULT);
                 System.out.println("Imported resources/HewittManchester.png");
-            } catch(IOException ioe) {
+            } catch (IOException ioe) {
                 ioe.printStackTrace();
             }
         }
-        if(Renderer.triBackground == null)
-        {
+        if (Renderer.triBackground == null) {
             try {
                 Renderer.triBackground = ImageIO.read(new File("resources/TriTowers.png")).getScaledInstance(85, 85,
-                            Image.SCALE_DEFAULT);
+                        Image.SCALE_DEFAULT);
                 System.out.println("Imported resources/TriTowers.png");
-            } catch(IOException ioe) {
+            } catch (IOException ioe) {
                 ioe.printStackTrace();
             }
         }
-        if(Renderer.isupdBackground == null)
-        {
+        if (Renderer.isupdBackground == null) {
             try {
                 Renderer.isupdBackground = ImageIO.read(new File("resources/ISUPD.png")).getScaledInstance(85, 85,
-                            Image.SCALE_DEFAULT);
+                        Image.SCALE_DEFAULT);
                 System.out.println("Imported resources/ISUPD.png");
-            } catch(IOException ioe) {
+            } catch (IOException ioe) {
                 ioe.printStackTrace();
             }
         }
-        if(Renderer.chanceBackground == null)
-        {
+        if (Renderer.chanceBackground == null) {
             try {
                 Renderer.chanceBackground = ImageIO.read(new File("resources/Chance.png")).getScaledInstance(85, 85,
-                            Image.SCALE_DEFAULT);
+                        Image.SCALE_DEFAULT);
                 System.out.println("Imported resources/Chance.png");
-            } catch(IOException ioe) {
+            } catch (IOException ioe) {
                 ioe.printStackTrace();
             }
         }
-        if(Renderer.commChestBackground == null)
-        {
+        if (Renderer.commChestBackground == null) {
             try {
-                Renderer.commChestBackground = ImageIO.read(new File("resources/CommunityChest.png")).getScaledInstance(85, 85,
-                            Image.SCALE_DEFAULT);
+                Renderer.commChestBackground = ImageIO.read(new File("resources/CommunityChest.png")).getScaledInstance(
+                        85, 85,
+                        Image.SCALE_DEFAULT);
                 System.out.println("Imported resources/CommunityChest.png");
-            } catch(IOException ioe) {
+            } catch (IOException ioe) {
                 ioe.printStackTrace();
             }
         }
-        if(Renderer.freeParkingBackground == null)
-        {
+        if (Renderer.freeParkingBackground == null) {
             try {
-                Renderer.freeParkingBackground = ImageIO.read(new File("resources/FreeParking.png")).getScaledInstance(85, 85,
-                            Image.SCALE_DEFAULT);
+                Renderer.freeParkingBackground = ImageIO.read(new File("resources/FreeParking.png")).getScaledInstance(
+                        85, 85,
+                        Image.SCALE_DEFAULT);
                 System.out.println("Imported resources/FreeParking.png");
-            } catch(IOException ioe) {
+            } catch (IOException ioe) {
                 ioe.printStackTrace();
             }
         }
 
-        if(Renderer.goToJailBackground == null)
-        {
+        if (Renderer.goToJailBackground == null) {
             try {
                 Renderer.goToJailBackground = ImageIO.read(new File("resources/GoToJail.png")).getScaledInstance(85, 85,
-                            Image.SCALE_DEFAULT);
+                        Image.SCALE_DEFAULT);
                 System.out.println("Imported resources/GoToJail.png");
-            } catch(IOException ioe) {
+            } catch (IOException ioe) {
                 ioe.printStackTrace();
             }
         }
@@ -635,9 +643,9 @@ public class Renderer extends Thread {
                 this.showGame(g2);
                 break;
             // case GAME_SETUP: (DEPRECATED)
-            //     // this.showSetUp(g2);
-            //     this.showGame(g2);
-            //     break;
+            // // this.showSetUp(g2);
+            // this.showGame(g2);
+            // break;
             case SPLASH_SCREEN:
             default:
                 this.showSplash(g2);
