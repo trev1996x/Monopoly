@@ -19,7 +19,6 @@ import java.awt.Image;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.lang.Thread;
-import java.util.function.BiConsumer;
 import java.io.File;
 import java.io.IOException;
 import java.awt.Shape;

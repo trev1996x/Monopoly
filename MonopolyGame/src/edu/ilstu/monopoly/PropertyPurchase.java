@@ -9,10 +9,8 @@ package edu.ilstu.monopoly;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.event.MouseInputAdapter;
 import javax.swing.*;
 import java.awt.FlowLayout;
-import java.awt.*;
 import java.awt.event.*;
 
 
