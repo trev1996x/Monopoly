@@ -3,6 +3,7 @@
  * Date: 20221114
  */
 package edu.ilstu.monopoly.items;
+
 /**
  * A renderable object representing a player of the game
  */
@@ -50,11 +51,6 @@ public class Player extends Renderable {
                 fm.getDescent() + this.owner.getY() + 45); // hardset value
     }
 
-    /*
-     * Create box that displays the current players stats here.
-     * Player number, Money, List of properties they own.
-     */
-
     /**
      * Temporary
      */
@@ -65,6 +61,7 @@ public class Player extends Renderable {
 
     /**
      * Set the game box
+     * 
      * @param newBox new Game box
      */
     public void setGameBox(GameBox newBox) {
@@ -73,6 +70,7 @@ public class Player extends Renderable {
 
     /*
      * Get the game box
+     * 
      * @return Game box
      */
     public GameBox getGameBox() {
@@ -86,32 +84,31 @@ public class Player extends Renderable {
 
     /**
      * Draw the player stats to screen
+     * 
      * @param g2 Graphics2D
-     * @param x x Location
-     * @param y y Location
+     * @param x  x Location
+     * @param y  y Location
      */
     public void renderStats(Graphics2D g2, int x, int y) {
         g2.setFont(new Font("Arial", Font.BOLD, 24));
         FontMetrics fm = g2.getFontMetrics();
 
-        
-
         String stats = this.getStats();
-        for(String line : stats.split("\n"))
-        {
+        for (String line : stats.split("\n")) {
             Rectangle2D bounds = fm.getStringBounds(line, g2);
             g2.setColor(Color.WHITE);
-            g2.fillRect(x, y, (int)bounds.getWidth() + 4, (int)bounds.getHeight() + 4);
+            g2.fillRect(x, y, (int) bounds.getWidth() + 4, (int) bounds.getHeight() + 4);
             g2.setColor(Color.BLACK);
             g2.drawString(line,
                     x + 2,
                     y + fm.getAscent() + 2);
-            y += (int)bounds.getHeight() + 4;
+            y += (int) bounds.getHeight() + 4;
         }
     }
 
     /**
      * Get the money
+     * 
      * @return int
      */
     public int getMoney() {
@@ -120,6 +117,7 @@ public class Player extends Renderable {
 
     /**
      * Set the money
+     * 
      * @param money int
      */
     public void setMoney(int money) {
@@ -128,28 +126,30 @@ public class Player extends Renderable {
 
     /**
      * Add to money
+     * 
      * @param toAdd int
      */
-    public void addMoney (int toAdd) {
+    public void addMoney(int toAdd) {
         this.money += toAdd;
     }
 
     /**
      * Subtract from money
+     * 
      * @param toRem int
      */
-    public void subMoney (int toRem) {
+    public void subMoney(int toRem) {
         this.money -= toRem;
     }
 
     /**
      * To change player stats, use this method!
+     * 
      * @return Player Stats in String form
      */
     public String getStats() {
         return new String(
-            "Player " + Integer.toString(this.identifier) + " stats: \nMoney: $" + this.money
-        );
+                "Player " + Integer.toString(this.identifier) + " stats: \nMoney: $" + this.money);
     }
 
     private int money = 1_000;
