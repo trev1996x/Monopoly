@@ -18,6 +18,7 @@ import java.awt.Image;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.lang.Thread;
+import java.util.function.BiConsumer;
 import java.io.File;
 import java.io.IOException;
 import java.awt.Shape;
@@ -237,27 +238,122 @@ public class Renderer extends Thread {
          */
         g2.setColor(Color.BLACK);
         this.boxes[0].render(g2, "START");
+        this.boxes[0].setMethod((box, player)->{
+            player.addMoney(200);
+        }); //collect $200 when you pass go
 
         g2.setColor(DARK_YELLOW); // set color // create object
         this.boxes[1].render(g2, "Schroeder\nHall"); // draw object to screen
+        this.boxes[1].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(60); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_RED);
         this.boxes[2].render(g2, "Metcalf\nSchool");
+        this.boxes[2].setMethod((box, player)->{
+
+            final int price = 300;
+
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow, price);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(60);// Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_YELLOW);
         this.boxes[3].render(g2, "Edwards Hall");
+        this.boxes[3].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(60); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_RED);
         this.boxes[4].render(g2, "Community\nChest");
         g2.drawImage(Renderer.commChestBackground, this.boxes[4].getX(), this.boxes[4].getY(), Color.WHITE, this.gameRef.display.getFocusCycleRootAncestor());
 
-
         g2.setColor(DARK_YELLOW);
         this.boxes[5].render(g2, "Watterson");
         g2.drawImage(Renderer.wattyBackground, this.boxes[5].getX(), this.boxes[5].getY(), Color.WHITE, this.gameRef.display.getFocusCycleRootAncestor());
+        this.boxes[5].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(200); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_RED);
         this.boxes[6].render(g2, "Fairchild Hall");
+        this.boxes[6].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(100); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_YELLOW);
         this.boxes[7].render(g2, "Chance");
@@ -266,9 +362,45 @@ public class Renderer extends Thread {
 
         g2.setColor(DARK_RED);
         this.boxes[8].render(g2, "Cook Hall");
+        this.boxes[8].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(100); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_YELLOW);
         this.boxes[9].render(g2, "DeGarmo Hall");
+        this.boxes[9].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(100); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(Color.BLACK);
         this.boxes[10].render(g2, "Jail");
@@ -281,6 +413,24 @@ public class Renderer extends Thread {
 
         g2.setColor(DARK_RED);
         this.boxes[11].render(g2, "Fell Hall");
+        this.boxes[11].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(140); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_YELLOW);
         this.boxes[12].render(g2, "Chance");
@@ -288,25 +438,151 @@ public class Renderer extends Thread {
 
         g2.setColor(DARK_RED);
         this.boxes[13].render(g2, "McCormick\nHall");
+        this.boxes[13].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(140); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_YELLOW);
         this.boxes[14].render(g2, "CVA");
+        this.boxes[14].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(140); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_RED);
         this.boxes[15].render(g2, "Hewett\nManchester");
         g2.drawImage(Renderer.hewittBackground, this.boxes[15].getX(), this.boxes[15].getY(), Color.WHITE, this.gameRef.display.getFocusCycleRootAncestor());
+        this.boxes[15].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(200); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_YELLOW);
         this.boxes[16].render(g2, "State Farm\nHall");
+        this.boxes[16].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(180); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_RED);
         this.boxes[17].render(g2, "Williams Hall");
+        this.boxes[17].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(180); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_YELLOW);
         this.boxes[18].render(g2, "Hovey Hall");
+        this.boxes[18].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(180); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_RED);
         this.boxes[19].render(g2, "Moulton Hall");
+        this.boxes[19].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(180); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(Color.BLACK);
         this.boxes[20].render(g2, "Go to\nJail");
@@ -320,22 +596,130 @@ public class Renderer extends Thread {
 
         g2.setColor(DARK_YELLOW);
         this.boxes[21].render(g2, "Felmley Hall");
+        this.boxes[21].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(220); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_RED);
         this.boxes[22].render(g2, "Planetarium");
+        this.boxes[22].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(220); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_YELLOW);
         this.boxes[23].render(g2, "Science Lab");
+        this.boxes[23].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(220); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_RED);
         this.boxes[24].render(g2, "Milner Library");
+        this.boxes[24].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(220); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_YELLOW);
         this.boxes[25].render(g2, "Tri Towers");
         g2.drawImage(Renderer.triBackground, this.boxes[25].getX(), this.boxes[25].getY(), Color.WHITE, this.gameRef.display.getFocusCycleRootAncestor());
+        this.boxes[25].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(200); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_RED);
         this.boxes[26].render(g2, "Bone Center");
+        this.boxes[26].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(260); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_YELLOW);
         this.boxes[27].render(g2, "Community\nChest");
@@ -344,9 +728,45 @@ public class Renderer extends Thread {
 
         g2.setColor(DARK_RED);
         this.boxes[28].render(g2, "Uptown");
+        this.boxes[28].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(260); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_YELLOW);
         this.boxes[29].render(g2, "Ropp Building");
+        this.boxes[29].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(260); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(Color.BLACK);
         this.boxes[30].render(g2, "Free Parking");
@@ -360,31 +780,193 @@ public class Renderer extends Thread {
 
         g2.setColor(DARK_YELLOW);
         this.boxes[31].render(g2, "Vidette\nBuilding");
+        this.boxes[31].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(300); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_RED);
         this.boxes[32].render(g2, "Hancock\nStadium");
+        this.boxes[32].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(300); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_YELLOW);
         this.boxes[33].render(g2, "University\nFarm");
+        this.boxes[33].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(300); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_RED);
         this.boxes[34].render(g2, "Watterson\nSubway");
+        this.boxes[34].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(15); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_YELLOW);
         this.boxes[35].render(g2, "Cardinal Court");
         g2.drawImage(Renderer.cardinalBackground, this.boxes[35].getX(), this.boxes[35].getY(), Color.WHITE, this.gameRef.display.getFocusCycleRootAncestor());
+        this.boxes[35].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(200); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_RED);
         this.boxes[36].render(g2, "Lot S103\n:(( </3");
+        this.boxes[36].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(999); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_YELLOW);
         this.boxes[37].render(g2, "Quad");
+        this.boxes[37].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(350); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_RED);
         this.boxes[38].render(g2, "Julian Hall");
+        this.boxes[38].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(350); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         g2.setColor(DARK_YELLOW);
         this.boxes[39].render(g2, "Old Union");
+        this.boxes[39].setMethod((box, player)->{
+            if(box.owner != null && box.owner != player) {
+                // Box has an owner and it's not the same player
+                // Charge player x amount of money
+            } else
+            {
+                // Ask if player wants to purchase property
+                PropertyPurchase pp = new PropertyPurchase();
+                pp.showPurchasePropertyDialog(this.gameRef.mainWindow);
+                if(pp.confirmation)
+                {
+                    // Player decided to purchase property
+                    player.subMoney(400); // Charge player x amount to buy
+                    // Set owner of box
+                    box.owner = player;
+                }
+            }
+        });
 
         // Identifiers for game boxes
 
@@ -439,9 +1021,13 @@ public class Renderer extends Thread {
                     if (i + forward_move < boxes.length) {
                         // update the game box
                         oldPlayer.setGameBox(boxes[i + forward_move]);
+                        if(boxes[i + forward_move].hasMethod())
+                            boxes[i + forward_move].runMethod(oldPlayer);
                     } else {
                         // update the game box to 0 + offset
                         oldPlayer.setGameBox(boxes[0 + i + forward_move - boxes.length]);
+                        if(boxes[i + forward_move].hasMethod())
+                            boxes[i + forward_move].runMethod(oldPlayer);
                     }
                     break;
                 }
