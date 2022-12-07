@@ -14,6 +14,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.util.function.BiConsumer;
 
 import edu.ilstu.monopoly.Renderable;
 
@@ -52,6 +53,21 @@ public class GameBox extends Renderable {
         }
     }
 
+    public void setMethod(BiConsumer<GameBox, Player> method)
+    {
+        this.m_landMethod = method;
+    }
+
+    public void runMethod(Player player)
+    {
+        this.m_landMethod.accept(this, player);
+    }
+
+    public boolean hasMethod()
+    {
+        return this.m_landMethod != null;
+    }
+
     @Override
     public Rectangle getBounds() {
         return new Rectangle(this.x, this.y, this.width, this.height);
@@ -81,4 +97,7 @@ public class GameBox extends Renderable {
     private int width;
     private int height;
 
+    private BiConsumer<GameBox, Player> m_landMethod = null;
+    
+    public Player owner = null;
 }

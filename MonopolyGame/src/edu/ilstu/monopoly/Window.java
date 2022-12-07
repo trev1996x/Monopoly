@@ -3,6 +3,7 @@
  * Date: 20221114
  */
 package edu.ilstu.monopoly;
+
 /**
  * The main JFrame
  */
@@ -22,7 +23,8 @@ public class Window extends JFrame {
 	 */
 	Window(String title) {
 		super(title); // set title and initialize JFrame
-		super.setIconImage(Toolkit.getDefaultToolkit().getImage("resources/favicon.png")); // set favicon // https://ecomputernotes.com/java/awt-and-applets/toolkit-getdefaulttoolkit-getimage
+		super.setIconImage(Toolkit.getDefaultToolkit().getImage("./resources/favicon.png")); // set favicon //
+																								// https://ecomputernotes.com/java/awt-and-applets/toolkit-getdefaulttoolkit-getimage
 		super.setAlwaysOnTop(true); // always on top of other apps
 		super.setDefaultCloseOperation(DISPOSE_ON_CLOSE); // don't exit on close, allow for clean up
 		Dimension defaultDimension = new Dimension(1000, 1000); // set default window size
