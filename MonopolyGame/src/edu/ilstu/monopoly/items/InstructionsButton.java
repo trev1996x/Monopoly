@@ -16,9 +16,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import javax.swing.JFrame;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.text.html.HTML;
 
 import java.awt.FlowLayout;
 
