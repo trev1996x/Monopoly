@@ -17,6 +17,9 @@ import java.awt.Rectangle;
 import javax.swing.JFrame;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.text.html.HTML;
+
 import java.awt.FlowLayout;
 
 import edu.ilstu.monopoly.Renderable;
@@ -107,42 +110,44 @@ public class InstructionsButton extends Renderable {
 		this.infoBox.setModal(true);
 		this.infoBox.setAlwaysOnTop(true);
 		this.infoBox.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		this.infoBox.setSize(800, 800);
+		this.infoBox.setSize(775, 500);
 
 		FlowLayout layout = new FlowLayout();
 		layout.setAlignment(0);
 		this.infoBox.setLayout(layout);
 
-		JLabel howTo = new JLabel("How to play ISU Monopoly:");
-		JLabel label0 = new JLabel("Monopoly user manual ");
-		this.infoBox.add(label0);
-		JLabel label1 = new JLabel("1.	Overview ");
-		this.infoBox.add(label1);
-		JLabel label2 = new JLabel(
-				"Monopoly is a board game for two to four players, in which the main goal is to remain financially solvent while forcing to collect the funds from other player when they land on your space.");
-		this.infoBox.add(label2);
-		JLabel label3 = new JLabel("");
-		this.infoBox.add(label3);
-		JLabel label4 = new JLabel("2.	Gameplay and control ");
-		this.infoBox.add(label4);
-		JLabel label5 = new JLabel(
-				"Ten little rectangles, one on each side of the square board, representing various properties, utilities, a jail, and other locations and occasions. Each player begins the game with a certain amount of fake money, and they  move across the board based on the results of a pair of dice. Any player who lands on an unclaimed property has the option to buy property, but if the player lands on a property that is already possessed by another player, that player will be charged rent.");
-		this.infoBox.add(label5);
-		JLabel label6 = new JLabel("");
-		this.infoBox.add(label6);
-		JLabel label7 = new JLabel("3.	Credits ");
-		this.infoBox.add(label7);
-		JLabel label8 = new JLabel(
-				"At the beginning of the game, each players are given the same amount of funds, as long as the running across the board, the player can earn or lose the funds, if the player do not have enough money to pay rent or other obligations during they turn, they may choose to sell the property.");
-		this.infoBox.add(label8);
-		JLabel label9 = new JLabel("");
-		this.infoBox.add(label9);
-		JLabel label10 = new JLabel("4.	Winner ");
-		this.infoBox.add(label10);
-		JLabel label11 = new JLabel(
-				"A player keeps running around the board until they run out of funds. A player who run out the funds results in removal from the game and considered as loser. The winner is the last player remaining present on the board. You can also choose to end the game at any anytime by calculating the sum of each player, the player with most funds is considered as the winner.");
-		this.infoBox.add(label11);
-		this.infoBox.add(howTo);
+		// Formats the instruction manual to one String (in HTML format) that can be
+		// passed onto the JOptionPane for display
+		final String instructionsString = "<html><b>Monopoly user manual</b><br><br>" +
+				"<b>Overview:</b><br />"
+				+ "Monopoly is a board game for two to four players, in which the main goal is to remain financially solvent<br />"
+				+
+				"while forcing to collect the funds from other player when they land on your space.<br /><br />"
+				+
+				"<b>Gameplay and Control:</b><br />" +
+				"There are 10 spaces on each side of the board, representing various properties, utilities, a jail, and other<br />"
+				+
+				"locations around ISU. Each player begins the game with $1000. Each player rolls the dice to move across the<br />"
+				+
+				"board. Any player who lands on an unclaimed property has the option to buy property, but if the player<br />"
+				+
+				"lands on a property that is already possessed by another player, that player will be charged rent. If a<br />"
+				+
+				"player lands on Chance or Community Chest, a card will be drawn, and the event will be displayed in a pop-up box.<br /><br />"
+				+
+				"<b>Credits:</b><br />"
+				+
+				"If the player does not have enough money to pay rent or other fees during their turn, they may choose to sell<br />"
+				+
+				"the property at half of its value.<br /><br />"
+				+
+				"<b>Winning:</b><br />"
+				+
+				"If any player runs out of money, the game will come to an end. The player with the most money is declared the winner.<br /><<br />"
+				+
+				"You can also choose to end the game at any anytime by selecting the “End Game” button.</html>";
+		JOptionPane instrucOptionPane = new JOptionPane(instructionsString);
+		this.infoBox.add(instrucOptionPane);
 
 		this.infoBox.setLocationRelativeTo(null);
 		this.infoBox.setVisible(true);

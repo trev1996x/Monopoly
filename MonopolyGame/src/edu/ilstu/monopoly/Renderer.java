@@ -25,31 +25,20 @@ import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import javax.swing.JFrame;
 import javax.imageio.ImageIO;
-
 import edu.ilstu.monopoly.items.*;
 
 public class Renderer extends Thread {
     @SuppressWarnings("unused")
     private boolean toggle_debug = false; // for DebugBox colors
-
     public static Image boardBackground = null;
-
     public static Image wattyBackground = null;
-
     public static Image triBackground = null;
-
     public static Image hewittBackground = null;
-
     public static Image cardinalBackground = null;
-
     public static Image isupdBackground = null;
-
     public static Image commChestBackground = null;
-
     public static Image chanceBackground = null;
-
     public static Image freeParkingBackground = null;
-
     public static Image goToJailBackground = null;
 
     // sets static ints for the prices of the properties
