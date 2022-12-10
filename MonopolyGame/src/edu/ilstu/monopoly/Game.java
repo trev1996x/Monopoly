@@ -24,8 +24,6 @@ public class Game {
 		for (int i = 0; i < Player.MAX_PLAYERS; i++)
 			this.players.add(new Player(i + 1));
 
-		this.players.trimToSize(); // Leave this here
-
 		// This will start the game threads, so this MUST run last!
 		try {
 			this.run();
@@ -118,6 +116,10 @@ public class Game {
 	 */
 	public void startPlaying() {
 		this.status = GameStatus.CURRENTLY_PLAYING;
+		for(int i = 0; i < this.players.size(); i++)
+			if(this.players.get(i) == null)
+				this.players.set(i, new Player(i + 1));
+		this.players.trimToSize(); // Leave this here
 	}
 
 	/**

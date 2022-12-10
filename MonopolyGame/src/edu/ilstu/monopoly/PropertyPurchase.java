@@ -6,9 +6,9 @@
 */
 package edu.ilstu.monopoly;
 
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import edu.ilstu.monopoly.items.GameBox;
+import edu.ilstu.monopoly.items.Player;
+
 import javax.swing.*;
 import java.awt.FlowLayout;
 import java.awt.event.*;
@@ -18,16 +18,22 @@ public class PropertyPurchase {
 
     private JDialog infoBox;
 
-    public void showPurchasePropertyDialog(JFrame owner, int price) {
+    public void showPurchasePropertyDialog(JFrame owner, Player player, GameBox box, int price) {
 
         this.infoBox = new JDialog(owner, "Purchase Property?");
-        this.infoBox.setPreferredSize(new Dimension(500, 500));
+        this.infoBox.setPreferredSize(new Dimension(250, 250));
         this.infoBox.setSize(new Dimension(250, 250));
         this.infoBox.setResizable(false);
         this.infoBox.setModal(true);
+        this.infoBox.setLocationRelativeTo(null);
         this.infoBox.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        JLabel purchasePropertyQuestion = new JLabel("Purchase property for $" + price + "?");
+        JPanel panel1 = new JPanel();
+        JPanel panel2 = new JPanel();
+        JPanel panel3 = new JPanel();
+
+        JLabel purchasePropertyQuestion = new JLabel("Purchase " + box.label +  " for $" + price + "?");
+        JLabel playerTotal = new JLabel("You currently have $" + player.getMoney() + ".");
         JButton optionYes = new JButton("Yes");
         JButton optionNo = new JButton("No");
 
@@ -49,23 +55,27 @@ public class PropertyPurchase {
             }
         });
 
-        this.infoBox.add(purchasePropertyQuestion);
-        this.infoBox.add(optionYes);
-        this.infoBox.add(optionNo);
+        panel1.add(purchasePropertyQuestion);
+        this.infoBox.add(panel1);
+        
+        panel2.add(playerTotal);
+        this.infoBox.add(panel2);
+
+        panel3.add(optionYes);
+        panel3.add(optionNo);
+        this.infoBox.add(panel3);
 
         FlowLayout layout = new FlowLayout();
         layout.setAlignment(0);
+        panel1.setLayout(layout);
+        panel2.setLayout(layout);
+        panel3.setLayout(layout);
         this.infoBox.setLayout(layout);
 
         this.infoBox.setLocationRelativeTo(null);
         this.infoBox.setVisible(true);
 
     }
-
-    // Just a default override for testing purposes
-    public void showPurchasePropertyDialog(JFrame owner) {
-        this.showPurchasePropertyDialog(owner, 0);
-    }
-
+    
     public boolean confirmation = false;
 }

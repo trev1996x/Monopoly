@@ -25,24 +25,25 @@ public class GameBox extends Renderable {
         this.width = this.height = sideSize;
     }
 
+    // @Override
+    // public void render(Graphics2D g2) {
+
+    //     g2.fillRect(this.x, this.y, this.width, this.height);
+
+    // }
+
     @Override
     public void render(Graphics2D g2) {
 
         g2.fillRect(this.x, this.y, this.width, this.height);
 
-    }
-
-    public void render(Graphics2D g2, String label) {
-
-        g2.fillRect(this.x, this.y, this.width, this.height);
-
         g2.setColor(Color.WHITE);
 
-        g2.setFont(new Font("Verdana", Font.BOLD, 12));
+        g2.setFont(new Font("Arial", Font.BOLD, 12));
         FontMetrics fm = g2.getFontMetrics();
 
         int _y = this.y;
-        for(String line : label.split("\n"))
+        for(String line : this.label.split("\n"))
         {
             Rectangle2D bounds = fm.getStringBounds(line, g2);
             g2.setColor(Color.WHITE);
@@ -100,4 +101,5 @@ public class GameBox extends Renderable {
     private BiConsumer<GameBox, Player> m_landMethod = null;
     
     public Player owner = null;
+    public String label = "Property";
 }
