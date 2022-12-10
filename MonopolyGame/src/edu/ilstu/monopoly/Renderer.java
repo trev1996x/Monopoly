@@ -217,7 +217,9 @@ public class Renderer extends Thread {
             // Charge player x amount of money
             String message = "You paid " + price + " for rent.";
             this.showMessageBox(this.gameRef.mainWindow, player, message);
+            int rentMoney = player.getMoney() >= price ? price : player.getMoney();
             player.subMoney(price);
+            box.owner.addMoney(rentMoney);
         } else if(player.getMoney() >= price) {
             // Ask if player wants to purchase property
             PropertyPurchase pp = new PropertyPurchase();
@@ -262,7 +264,7 @@ public class Renderer extends Thread {
 
     public void showMessageBox(JFrame owner, Player player, String message) {
 
-        this.messageBox = new JDialog(owner, "Card");
+        this.messageBox = new JDialog(owner, "New message!");
         Dimension size = new Dimension(550,100);
         this.messageBox.setPreferredSize(size);
         this.messageBox.setSize(size);
