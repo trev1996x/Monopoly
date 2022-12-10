@@ -220,7 +220,9 @@ public class Renderer extends Thread {
             int rentMoney = player.getMoney() >= price ? price : player.getMoney();
             player.subMoney(price);
             box.owner.addMoney(rentMoney);
-        } else if(player.getMoney() >= price) {
+        } 
+        else if (box.owner == player); // ignorant conditional
+        else if(player.getMoney() >= price) {
             // Ask if player wants to purchase property
             PropertyPurchase pp = new PropertyPurchase();
             pp.showPurchasePropertyDialog(this.gameRef.mainWindow, player, box, price);
