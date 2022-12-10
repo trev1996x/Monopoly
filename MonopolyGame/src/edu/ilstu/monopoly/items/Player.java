@@ -152,6 +152,15 @@ public class Player extends Renderable {
                 "Player " + Integer.toString(this.identifier) + " stats: \nMoney: $" + this.money);
     }
 
+    public int getIdentifier() {
+        return this.identifier;
+    }
+
+    public void reset() {
+        this.money = 1_000;
+        this.setGameBox(null);
+    }
+
     private int money = 1_000;
 
     private int identifier = -1;

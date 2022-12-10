@@ -216,7 +216,7 @@ public class Renderer extends Thread {
             // Box has an owner and it's not the same player
             // Charge player x amount of money
             String message = "You paid " + price + " for rent.";
-            this.cardDrawn(this.gameRef.mainWindow, player, message);
+            this.showMessageBox(this.gameRef.mainWindow, player, message);
             player.subMoney(price);
         } else if(player.getMoney() >= price) {
             // Ask if player wants to purchase property
@@ -236,7 +236,11 @@ public class Renderer extends Thread {
             // eliminate them
             for(int i = 0; i < this.gameRef.players.size(); i++)
                 if(this.gameRef.players.get(i) == playerToEliminate)
+                {
+                    this.showMessageBox(this.gameRef.mainWindow, playerToEliminate, "You've gone in debt. You've been eliminated.");
                     this.gameRef.players.set(i, null);
+                    break;
+                }
 
         int j = 0;
         for(int i = 0; i < this.gameRef.players.size(); i++)
@@ -244,36 +248,36 @@ public class Renderer extends Thread {
                 j++;
 
         if(j < 2) {
-            this.cardDrawn(this.gameRef.mainWindow, playerToEliminate, "Game over!!!");
+            this.showMessageBox(this.gameRef.mainWindow, playerToEliminate, "Game over!!! Player " + this.gameRef.currentPlayer.getIdentifier() + " has won!");
+            // Cleaning up references (GC will pick up the rest..)
+            this.gameRef.currentPlayer = null;
             for(int i = 0; i < this.gameRef.players.size(); i++)
             this.gameRef.players.set(i, null);
-            
             // Take back to splash screen
             this.gameRef.status = GameStatus.SPLASH_SCREEN;
         }
     }
 
-    private JDialog cardDrawn;
+    private JDialog messageBox;
 
-    public void cardDrawn(JFrame owner, Player player,  String message) {
+    public void showMessageBox(JFrame owner, Player player, String message) {
 
-        this.cardDrawn = new JDialog(owner, "Card");
+        this.messageBox = new JDialog(owner, "Card");
         Dimension size = new Dimension(550,100);
-        this.cardDrawn.setPreferredSize(size);
-        this.cardDrawn.setSize(size);
-        this.cardDrawn.setResizable(false);
-        this.cardDrawn.setLocationRelativeTo(null);
-        this.cardDrawn.setModal(true);
-        this.cardDrawn.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.messageBox.setPreferredSize(size);
+        this.messageBox.setSize(size);
+        this.messageBox.setResizable(false);
+        this.messageBox.setLocationRelativeTo(null);
+        this.messageBox.setModal(true);
+        this.messageBox.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel panel1 = new JPanel();
         JLabel label = new JLabel(message);
 
         panel1.add(label);
-        this.cardDrawn.add(panel1);
+        this.messageBox.add(panel1);
 
-        this.cardDrawn.setVisible(true);
-        java.lang.Runtime.getRuntime().gc(); // garbage collect for the helluvit
+        this.messageBox.setVisible(true);
     }
 
 
@@ -285,47 +289,47 @@ public class Renderer extends Thread {
         switch(randChestCard) {
         case 1:
             message = "Congrats you won $200";
-            this.cardDrawn(this.gameRef.mainWindow, player, message);
+            this.showMessageBox(this.gameRef.mainWindow, player, message);
             player.addMoney(200);
             break;
         case 2:
             message = "It's your birthday. Collect $10.";
-            this.cardDrawn(this.gameRef.mainWindow, player, message);
+            this.showMessageBox(this.gameRef.mainWindow, player, message);
             player.addMoney(10);
             break;
         case 3:
             message = "It's payday! Collect $200.";
-            this.cardDrawn(this.gameRef.mainWindow, player, message);
+            this.showMessageBox(this.gameRef.mainWindow, player, message);
             player.addMoney(200);
             break;
         case 4:
             message = "You need textbooks. Pay $100.";
-            this.cardDrawn(this.gameRef.mainWindow, player, message);
+            this.showMessageBox(this.gameRef.mainWindow, player, message);
             player.subMoney(100);
             break;
         case 5:
             message = "You buy concert tickets. Pay $50";
-            this.cardDrawn(this.gameRef.mainWindow, player, message);
+            this.showMessageBox(this.gameRef.mainWindow, player, message);
             player.subMoney(50);
             break;
         case 6:
             message = "You win a giveaway. Collect $69";
-            this.cardDrawn(this.gameRef.mainWindow, player, message);
+            this.showMessageBox(this.gameRef.mainWindow, player, message);
             player.addMoney(69);
             break;
         case 7:
             message = "You join an RSO. Pay $50 fee.";
-            this.cardDrawn(this.gameRef.mainWindow, player, message);
+            this.showMessageBox(this.gameRef.mainWindow, player, message);
             player.subMoney(50);
             break;
         case 8:
             message = "You go to a Football game. Pay the admission fee $15.";
-            this.cardDrawn(this.gameRef.mainWindow, player, message);
+            this.showMessageBox(this.gameRef.mainWindow, player, message);
             player.addMoney(15);
             break;
         case 9:
             message = "Your roommate paid you for Chipotle. Collect $15";
-            this.cardDrawn(this.gameRef.mainWindow, player, message);
+            this.showMessageBox(this.gameRef.mainWindow, player, message);
             player.addMoney(15);
             break;
         case 10:
@@ -334,7 +338,7 @@ public class Renderer extends Thread {
         default:
         // case 10:
             message = "You found $20 on the street.";
-            this.cardDrawn(this.gameRef.mainWindow, player, message);
+            this.showMessageBox(this.gameRef.mainWindow, player, message);
             player.addMoney(20);
             break;
         }
@@ -347,47 +351,47 @@ public class Renderer extends Thread {
         switch (randChanceCard) {
         case 1:
             message = "Get a drinking ticket. Pay $100";
-            this.cardDrawn(this.gameRef.mainWindow, player, message);
+            this.showMessageBox(this.gameRef.mainWindow, player, message);
             player.subMoney(100);
             break;
         case 2:
             message = "Get a jaywalking ticket. Pay $50.";
-            this.cardDrawn(this.gameRef.mainWindow, player, message);
+            this.showMessageBox(this.gameRef.mainWindow, player, message);
             player.subMoney(50);
             break;
         case 3:
             message = "You got a parking ticket. Pay $25.";
-            this.cardDrawn(this.gameRef.mainWindow, player, message);
+            this.showMessageBox(this.gameRef.mainWindow, player, message);
             player.subMoney(25);
             break;
         case 4:
             message = "Get hit by Connect Transit bus. Collect $200 settlement fee.";
-            this.cardDrawn(this.gameRef.mainWindow, player, message);
+            this.showMessageBox(this.gameRef.mainWindow, player, message);
             player.addMoney(200);
             break;
         case 5:
             message = "You found a homeless person. Donate $10";
-            this.cardDrawn(this.gameRef.mainWindow, player, message);
+            this.showMessageBox(this.gameRef.mainWindow, player, message);
             player.subMoney(10);
             break;
         case 6:
             message = "You found an illegal copy of Frozen. Burn it and sell it for $20.";
-            this.cardDrawn(this.gameRef.mainWindow, player, message);
+            this.showMessageBox(this.gameRef.mainWindow, player, message);
             player.addMoney(20);
             break;
         case 7:
             message = "Biden Student Loan Forgiveness. Gain $500.";
-            this.cardDrawn(this.gameRef.mainWindow, player, message);
+            this.showMessageBox(this.gameRef.mainWindow, player, message);
             player.addMoney(500);
             break;
         case 8:
             message = "Enemy AC-130J Inbound. Give $300 for a single 105mm Howitzer round.";
-            this.cardDrawn(this.gameRef.mainWindow, player, message);
+            this.showMessageBox(this.gameRef.mainWindow, player, message);
             player.subMoney(300);
             break;
         case 9:
             message = "You bought the Lot S103 Parking Lot pass. How unfortunate... Pay $200.";
-            this.cardDrawn(this.gameRef.mainWindow, player, message);
+            this.showMessageBox(this.gameRef.mainWindow, player, message);
             player.subMoney(200);
             break;
         case 10:
@@ -396,7 +400,7 @@ public class Renderer extends Thread {
         default:
         // case 10:
             message = "You bought an OnlyFriends subscription. Pay $10 / month.";
-            this.cardDrawn(this.gameRef.mainWindow, player, message);
+            this.showMessageBox(this.gameRef.mainWindow, player, message);
             player.subMoney(10);
             break;
         }
@@ -547,7 +551,10 @@ public class Renderer extends Thread {
         g2.setColor(Color.BLACK);
         this.boxes[20].label = "Go to\nJail";
         this.boxes[20].render(g2);
-        this.boxes[20].setMethod((box, player) -> player.setGameBox(boxes[10])); // just send them to jail don't hold them
+        this.boxes[20].setMethod((box, player) -> {
+            player.setGameBox(boxes[10]);
+            this.showMessageBox(this.gameRef.mainWindow, player, "You're going to jail!");
+        }); // just send them to jail don't hold them
         g2.drawImage(Renderer.goToJailBackground, this.boxes[20].getX(), this.boxes[20].getY(), Color.WHITE,
                 this.gameRef.display.getFocusCycleRootAncestor());
 
@@ -688,16 +695,20 @@ public class Renderer extends Thread {
 
             Player newPlayer = oldPlayer; // for initializer safety
 
-            // Get the next player in the Arraylist
+            // Get the next player in the Arraylist THAT IS NOT NULL
             for (int i = 0; i < this.gameRef.players.size(); i++) {
                 if (this.gameRef.players.get(i) == oldPlayer) {
-                    if (i + 1 < this.gameRef.players.size()) {
-                        newPlayer = this.gameRef.players.get(i + 1);
-                        break;
-                    } else {
-                        newPlayer = this.gameRef.players.get(0);
-                        break;
+                    for (int j = i + 1, k = 0; k < this.gameRef.players.size(); k++, j++)
+                    {
+                        // Note: j current iterator
+                        if(j >= this.gameRef.players.size()) j = 0;
+
+                        if(this.gameRef.players.get(j) != null) {
+                            newPlayer = this.gameRef.players.get(j);
+                            break;
+                        }
                     }
+                    break;
                 }
             }
 
@@ -779,7 +790,8 @@ public class Renderer extends Thread {
             }
 
         g2.setColor(ActivePlayer);
-        this.gameRef.currentPlayer.render(g2);
+        if(this.gameRef.currentPlayer != null)
+            this.gameRef.currentPlayer.render(g2);
 
         // g2.drawImage(Renderer.boardBackground, 43, 34, Color.WHITE,
         // this.gameRef.display.getFocusCycleRootAncestor());

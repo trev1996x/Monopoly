@@ -116,10 +116,11 @@ public class Game {
 	 */
 	public void startPlaying() {
 		this.status = GameStatus.CURRENTLY_PLAYING;
-		for(int i = 0; i < this.players.size(); i++)
-			if(this.players.get(i) == null)
-				this.players.set(i, new Player(i + 1));
+		for(int i = 0; i < this.players.size(); i++) {
+			this.players.set(i, new Player(i + 1));
+		}
 		this.players.trimToSize(); // Leave this here
+		java.lang.Runtime.getRuntime().gc(); // Just for the helluvit
 	}
 
 	/**

@@ -112,7 +112,7 @@ public class DiceRoll extends Renderable {
         if (done_iterating)
             return;
 
-        if (iter > 10) {
+        if (iter > 7) {
             done_iterating = true;
             iter = 0;
             return;
