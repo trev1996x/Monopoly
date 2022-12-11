@@ -104,18 +104,18 @@ public class Renderer extends Thread {
 
     public Image importImage(String filename) {
         File file = new File("./" + filename);
-        
-            try {
-                if(file.exists())
-                    return ImageIO.read(file);
-                else {
-                    InputStream is = getClass().getResourceAsStream("/" + filename);
-                    return ImageIO.read(is);
-                }
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-                return null;
+
+        try {
+            if (file.exists())
+                return ImageIO.read(file);
+            else {
+                InputStream is = getClass().getResourceAsStream("/" + filename);
+                return ImageIO.read(is);
             }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+            return null;
+        }
     }
 
     /**
@@ -237,9 +237,9 @@ public class Renderer extends Thread {
             int rentMoney = player.getMoney() >= price ? price : player.getMoney();
             player.subMoney(price);
             box.owner.addMoney(rentMoney);
-        } 
-        else if (box.owner == player); // ignorant conditional
-        else if(player.getMoney() >= price) {
+        } else if (box.owner == player)
+            ; // ignorant conditional
+        else if (player.getMoney() >= price) {
             // Ask if player wants to purchase property
             PropertyPurchase pp = new PropertyPurchase();
             pp.showPurchasePropertyDialog(this.gameRef.mainWindow, player, box, price);
@@ -253,27 +253,32 @@ public class Renderer extends Thread {
     }
 
     private void shouldEliminatePlayer(Player playerToEliminate) {
-        if(playerToEliminate.getMoney() < 0)
+        if (playerToEliminate.getMoney() < 0)
             // eliminate them
-            for(int i = 0; i < this.gameRef.players.size(); i++)
-                if(this.gameRef.players.get(i) == playerToEliminate)
-                {
-                    this.showMessageBox(this.gameRef.mainWindow, playerToEliminate, "You've gone in debt. You've been eliminated.");
+            for (int i = 0; i < this.gameRef.players.size(); i++)
+                if (this.gameRef.players.get(i) == playerToEliminate) {
+                    for (int j = 0; j < boxes.length; j++) {
+                        if (boxes[j].owner == playerToEliminate)
+                            boxes[j].owner = null;
+                    }
+                    this.showMessageBox(this.gameRef.mainWindow, playerToEliminate,
+                            "You've gone in debt. You've been eliminated.");
                     this.gameRef.players.set(i, null);
                     break;
                 }
 
         int j = 0;
-        for(int i = 0; i < this.gameRef.players.size(); i++)
-            if(this.gameRef.players.get(i) != null)
+        for (int i = 0; i < this.gameRef.players.size(); i++)
+            if (this.gameRef.players.get(i) != null)
                 j++;
 
-        if(j < 2) {
-            this.showMessageBox(this.gameRef.mainWindow, playerToEliminate, "Game over!!! Player " + this.gameRef.currentPlayer.getIdentifier() + " has won!");
+        if (j < 2) {
+            this.showMessageBox(this.gameRef.mainWindow, playerToEliminate,
+                    "Game over!!! Player " + this.gameRef.currentPlayer.getIdentifier() + " has won!");
             // Cleaning up references (GC will pick up the rest..)
             this.gameRef.currentPlayer = null;
-            for(int i = 0; i < this.gameRef.players.size(); i++)
-            this.gameRef.players.set(i, null);
+            for (int i = 0; i < this.gameRef.players.size(); i++)
+                this.gameRef.players.set(i, null);
             // Take back to splash screen
             this.gameRef.status = GameStatus.SPLASH_SCREEN;
         }
@@ -284,7 +289,7 @@ public class Renderer extends Thread {
     public void showMessageBox(JFrame owner, Player player, String message) {
 
         this.messageBox = new JDialog(owner, "New message!");
-        Dimension size = new Dimension(550,100);
+        Dimension size = new Dimension(550, 100);
         this.messageBox.setPreferredSize(size);
         this.messageBox.setSize(size);
         this.messageBox.setResizable(false);
@@ -301,67 +306,66 @@ public class Renderer extends Thread {
         this.messageBox.setVisible(true);
     }
 
-
     private void communityChest(Player player) {
         // Random class is used to pick a community chest card at random
         Random random = new Random();
         int randChestCard = random.nextInt(10) + 1; // 1..10
         String message;
-        switch(randChestCard) {
-        case 1:
-            message = "Congrats you won $200";
-            this.showMessageBox(this.gameRef.mainWindow, player, message);
-            player.addMoney(200);
-            break;
-        case 2:
-            message = "It's your birthday. Collect $10.";
-            this.showMessageBox(this.gameRef.mainWindow, player, message);
-            player.addMoney(10);
-            break;
-        case 3:
-            message = "It's payday! Collect $200.";
-            this.showMessageBox(this.gameRef.mainWindow, player, message);
-            player.addMoney(200);
-            break;
-        case 4:
-            message = "You need textbooks. Pay $100.";
-            this.showMessageBox(this.gameRef.mainWindow, player, message);
-            player.subMoney(100);
-            break;
-        case 5:
-            message = "You buy concert tickets. Pay $50";
-            this.showMessageBox(this.gameRef.mainWindow, player, message);
-            player.subMoney(50);
-            break;
-        case 6:
-            message = "You win a giveaway. Collect $69";
-            this.showMessageBox(this.gameRef.mainWindow, player, message);
-            player.addMoney(69);
-            break;
-        case 7:
-            message = "You join an RSO. Pay $50 fee.";
-            this.showMessageBox(this.gameRef.mainWindow, player, message);
-            player.subMoney(50);
-            break;
-        case 8:
-            message = "You go to a Football game. Pay the admission fee $15.";
-            this.showMessageBox(this.gameRef.mainWindow, player, message);
-            player.addMoney(15);
-            break;
-        case 9:
-            message = "Your roommate paid you for Chipotle. Collect $15";
-            this.showMessageBox(this.gameRef.mainWindow, player, message);
-            player.addMoney(15);
-            break;
-        case 10:
-            // fallthrough (don't fw dis)
-            // dont put anything here, it goes after default:
-        default:
-        // case 10:
-            message = "You found $20 on the street.";
-            this.showMessageBox(this.gameRef.mainWindow, player, message);
-            player.addMoney(20);
-            break;
+        switch (randChestCard) {
+            case 1:
+                message = "Congrats you won $200";
+                this.showMessageBox(this.gameRef.mainWindow, player, message);
+                player.addMoney(200);
+                break;
+            case 2:
+                message = "It's your birthday. Collect $10.";
+                this.showMessageBox(this.gameRef.mainWindow, player, message);
+                player.addMoney(10);
+                break;
+            case 3:
+                message = "It's payday! Collect $200.";
+                this.showMessageBox(this.gameRef.mainWindow, player, message);
+                player.addMoney(200);
+                break;
+            case 4:
+                message = "You need textbooks. Pay $100.";
+                this.showMessageBox(this.gameRef.mainWindow, player, message);
+                player.subMoney(100);
+                break;
+            case 5:
+                message = "You buy concert tickets. Pay $50";
+                this.showMessageBox(this.gameRef.mainWindow, player, message);
+                player.subMoney(50);
+                break;
+            case 6:
+                message = "You win a giveaway. Collect $69";
+                this.showMessageBox(this.gameRef.mainWindow, player, message);
+                player.addMoney(69);
+                break;
+            case 7:
+                message = "You join an RSO. Pay $50 fee.";
+                this.showMessageBox(this.gameRef.mainWindow, player, message);
+                player.subMoney(50);
+                break;
+            case 8:
+                message = "You go to a Football game. Pay the admission fee $15.";
+                this.showMessageBox(this.gameRef.mainWindow, player, message);
+                player.addMoney(15);
+                break;
+            case 9:
+                message = "Your roommate paid you for Chipotle. Collect $15";
+                this.showMessageBox(this.gameRef.mainWindow, player, message);
+                player.addMoney(15);
+                break;
+            case 10:
+                // fallthrough (don't fw dis)
+                // dont put anything here, it goes after default:
+            default:
+                // case 10:
+                message = "You found $20 on the street.";
+                this.showMessageBox(this.gameRef.mainWindow, player, message);
+                player.addMoney(20);
+                break;
         }
     }
 
@@ -370,60 +374,60 @@ public class Renderer extends Thread {
         int randChanceCard = random.nextInt(10) + 1; // 1..10
         String message;
         switch (randChanceCard) {
-        case 1:
-            message = "Get a drinking ticket. Pay $100";
-            this.showMessageBox(this.gameRef.mainWindow, player, message);
-            player.subMoney(100);
-            break;
-        case 2:
-            message = "Get a jaywalking ticket. Pay $50.";
-            this.showMessageBox(this.gameRef.mainWindow, player, message);
-            player.subMoney(50);
-            break;
-        case 3:
-            message = "You got a parking ticket. Pay $25.";
-            this.showMessageBox(this.gameRef.mainWindow, player, message);
-            player.subMoney(25);
-            break;
-        case 4:
-            message = "Get hit by Connect Transit bus. Collect $200 settlement fee.";
-            this.showMessageBox(this.gameRef.mainWindow, player, message);
-            player.addMoney(200);
-            break;
-        case 5:
-            message = "You found a homeless person. Donate $10";
-            this.showMessageBox(this.gameRef.mainWindow, player, message);
-            player.subMoney(10);
-            break;
-        case 6:
-            message = "You found an illegal copy of Frozen. Burn it and sell it for $20.";
-            this.showMessageBox(this.gameRef.mainWindow, player, message);
-            player.addMoney(20);
-            break;
-        case 7:
-            message = "Biden Student Loan Forgiveness. Gain $500.";
-            this.showMessageBox(this.gameRef.mainWindow, player, message);
-            player.addMoney(500);
-            break;
-        case 8:
-            message = "Enemy AC-130J Inbound. Give $300 for a single 105mm Howitzer round.";
-            this.showMessageBox(this.gameRef.mainWindow, player, message);
-            player.subMoney(300);
-            break;
-        case 9:
-            message = "You bought the Lot S103 Parking Lot pass. How unfortunate... Pay $200.";
-            this.showMessageBox(this.gameRef.mainWindow, player, message);
-            player.subMoney(200);
-            break;
-        case 10:
-            // fallthrough (don't fw dis)
-            // dont put anything here, it goes after default:
-        default:
-        // case 10:
-            message = "You bought an OnlyFriends subscription. Pay $10 / month.";
-            this.showMessageBox(this.gameRef.mainWindow, player, message);
-            player.subMoney(10);
-            break;
+            case 1:
+                message = "Get a drinking ticket. Pay $100";
+                this.showMessageBox(this.gameRef.mainWindow, player, message);
+                player.subMoney(100);
+                break;
+            case 2:
+                message = "Get a jaywalking ticket. Pay $50.";
+                this.showMessageBox(this.gameRef.mainWindow, player, message);
+                player.subMoney(50);
+                break;
+            case 3:
+                message = "You got a parking ticket. Pay $25.";
+                this.showMessageBox(this.gameRef.mainWindow, player, message);
+                player.subMoney(25);
+                break;
+            case 4:
+                message = "Get hit by Connect Transit bus. Collect $200 settlement fee.";
+                this.showMessageBox(this.gameRef.mainWindow, player, message);
+                player.addMoney(200);
+                break;
+            case 5:
+                message = "You found a homeless person. Donate $10";
+                this.showMessageBox(this.gameRef.mainWindow, player, message);
+                player.subMoney(10);
+                break;
+            case 6:
+                message = "You found an illegal copy of Frozen. Burn it and sell it for $20.";
+                this.showMessageBox(this.gameRef.mainWindow, player, message);
+                player.addMoney(20);
+                break;
+            case 7:
+                message = "Biden Student Loan Forgiveness. Gain $500.";
+                this.showMessageBox(this.gameRef.mainWindow, player, message);
+                player.addMoney(500);
+                break;
+            case 8:
+                message = "Enemy AC-130J Inbound. Give $300 for a single 105mm Howitzer round.";
+                this.showMessageBox(this.gameRef.mainWindow, player, message);
+                player.subMoney(300);
+                break;
+            case 9:
+                message = "You bought the Lot S103 Parking Lot pass. How unfortunate... Pay $200.";
+                this.showMessageBox(this.gameRef.mainWindow, player, message);
+                player.subMoney(200);
+                break;
+            case 10:
+                // fallthrough (don't fw dis)
+                // dont put anything here, it goes after default:
+            default:
+                // case 10:
+                message = "You bought an OnlyFriends subscription. Pay $10 / month.";
+                this.showMessageBox(this.gameRef.mainWindow, player, message);
+                player.subMoney(10);
+                break;
         }
     }
 
@@ -448,7 +452,6 @@ public class Renderer extends Thread {
         g2.fillRect(horizontalOffset, verticalOffset, boxSize * 11, boxSize * 11); // area = 715x715
         g2.drawImage(Renderer.boardBackground, horizontalOffset, verticalOffset, Color.WHITE,
                 this.gameRef.display.getFocusCycleRootAncestor());
-        // this.drawImage(g2, "background.png", new Dimension(715,715), 43, 34);
 
         /**
          * Begins top/north side panel
@@ -719,12 +722,12 @@ public class Renderer extends Thread {
             // Get the next player in the Arraylist THAT IS NOT NULL
             for (int i = 0; i < this.gameRef.players.size(); i++) {
                 if (this.gameRef.players.get(i) == oldPlayer) {
-                    for (int j = i + 1, k = 0; k < this.gameRef.players.size(); k++, j++)
-                    {
+                    for (int j = i + 1, k = 0; k < this.gameRef.players.size(); k++, j++) {
                         // Note: j current iterator
-                        if(j >= this.gameRef.players.size()) j = 0;
+                        if (j >= this.gameRef.players.size())
+                            j = 0;
 
-                        if(this.gameRef.players.get(j) != null) {
+                        if (this.gameRef.players.get(j) != null) {
                             newPlayer = this.gameRef.players.get(j);
                             break;
                         }
@@ -746,8 +749,7 @@ public class Renderer extends Thread {
                 if (boxes[i] == oldPlayer.getGameBox()) {
                     // check weird case, land on Start
                     // This check shouldn't be necessary
-                    if(i + forward_move - boxes.length == 0 || i + forward_move == 40)
-                    {
+                    if (i + forward_move - boxes.length == 0 || i + forward_move == 40) {
                         oldPlayer.setGameBox(boxes[0]);
                         if (boxes[0].hasMethod())
                             boxes[0].runMethod(oldPlayer);
@@ -765,9 +767,9 @@ public class Renderer extends Thread {
                         oldPlayer.setGameBox(boxes[0 + i + forward_move - (boxes.length - 1)]);
                         if (boxes[0 + i + forward_move - (boxes.length - 1)].hasMethod())
                             boxes[0 + i + forward_move - (boxes.length - 1)].runMethod(oldPlayer);
-                        
+
                         // If they went past Go
-                        if(i + forward_move != 0) {
+                        if (i + forward_move != 0) {
                             assert boxes[0].hasMethod() : "Start Box has no reward system.";
                             boxes[0].runMethod(oldPlayer); // Give $200
                         }
@@ -811,19 +813,14 @@ public class Renderer extends Thread {
             }
 
         g2.setColor(ActivePlayer);
-        if(this.gameRef.currentPlayer != null)
+        if (this.gameRef.currentPlayer != null)
             this.gameRef.currentPlayer.render(g2);
 
-        // g2.drawImage(Renderer.boardBackground, 43, 34, Color.WHITE,
-        // this.gameRef.display.getFocusCycleRootAncestor());
-        for(int i = 0; i < this.gameRef.players.size(); i++)
-        {
-            if(this.gameRef.players.get(i) != null)
-                this.gameRef.players.get(i).renderStats(g2, horizontalOffset + boxSize, (verticalOffset + boxSize) * (i + 1));
+        for (int i = 0; i < this.gameRef.players.size(); i++) {
+            if (this.gameRef.players.get(i) != null)
+                this.gameRef.players.get(i).renderStats(g2, horizontalOffset + boxSize,
+                        (verticalOffset + boxSize) * (i + 1));
         }
-        // this.gameRef.currentPlayer.renderStats(g2, horizontalOffset + boxSize, verticalOffset + boxSize); // Note:
-                                                                                                          // boxSize is
-                                                                                                          // 65
     }
 
     /**
@@ -863,82 +860,82 @@ public class Renderer extends Thread {
         // preload IO
         if (Renderer.boardBackground == null) {
             String fileName = "background.png";
-            if ((Renderer.boardBackground = importImage("resources/" + fileName) )!= null) {
+            if ((Renderer.boardBackground = importImage("resources/" + fileName)) != null) {
                 Renderer.boardBackground = Renderer.boardBackground.getScaledInstance(
-                    boxSize * 11, boxSize * 11,
-                    Image.SCALE_DEFAULT);
+                        boxSize * 11, boxSize * 11,
+                        Image.SCALE_DEFAULT);
                 System.out.println("Imported resources/" + fileName);
             }
         }
         if (Renderer.wattyBackground == null) {
             String fileName = "Watty.png";
-            if ((Renderer.wattyBackground = importImage("resources/" + fileName) )!= null) {
+            if ((Renderer.wattyBackground = importImage("resources/" + fileName)) != null) {
                 Renderer.wattyBackground = Renderer.wattyBackground.getScaledInstance(85, 85,
-                Image.SCALE_DEFAULT);
+                        Image.SCALE_DEFAULT);
                 System.out.println("Imported resources/" + fileName);
             }
         }
         if (Renderer.cardinalBackground == null) {
             String fileName = "CardinalCourt.png";
-            if ((Renderer.cardinalBackground = importImage("resources/" + fileName) )!= null) {
+            if ((Renderer.cardinalBackground = importImage("resources/" + fileName)) != null) {
                 Renderer.cardinalBackground = Renderer.cardinalBackground.getScaledInstance(85, 85,
-                Image.SCALE_DEFAULT);
+                        Image.SCALE_DEFAULT);
                 System.out.println("Imported resources/" + fileName);
             }
         }
         if (Renderer.hewittBackground == null) {
             String fileName = "HewittManchester.png";
-            if ((Renderer.hewittBackground = importImage("resources/" + fileName) )!= null) {
+            if ((Renderer.hewittBackground = importImage("resources/" + fileName)) != null) {
                 Renderer.hewittBackground = Renderer.hewittBackground.getScaledInstance(85, 85,
-                Image.SCALE_DEFAULT);
+                        Image.SCALE_DEFAULT);
                 System.out.println("Imported resources/" + fileName);
             }
         }
         if (Renderer.triBackground == null) {
             String fileName = "TriTowers.png";
-            if ((Renderer.triBackground = importImage("resources/" + fileName) )!= null) {
+            if ((Renderer.triBackground = importImage("resources/" + fileName)) != null) {
                 Renderer.triBackground = Renderer.triBackground.getScaledInstance(85, 85,
-                Image.SCALE_DEFAULT);
+                        Image.SCALE_DEFAULT);
                 System.out.println("Imported resources/" + fileName);
             }
         }
         if (Renderer.isupdBackground == null) {
             String fileName = "ISUPD.png";
-            if ((Renderer.isupdBackground = importImage("resources/" + fileName) )!= null) {
+            if ((Renderer.isupdBackground = importImage("resources/" + fileName)) != null) {
                 Renderer.isupdBackground = Renderer.isupdBackground.getScaledInstance(85, 85,
-                Image.SCALE_DEFAULT);
+                        Image.SCALE_DEFAULT);
                 System.out.println("Imported resources/" + fileName);
             }
         }
         if (Renderer.chanceBackground == null) {
             String fileName = "Chance.png";
-            if ((Renderer.chanceBackground = importImage("resources/" + fileName) )!= null) {
+            if ((Renderer.chanceBackground = importImage("resources/" + fileName)) != null) {
                 Renderer.chanceBackground = Renderer.chanceBackground.getScaledInstance(85, 85,
-                Image.SCALE_DEFAULT);
+                        Image.SCALE_DEFAULT);
                 System.out.println("Imported resources/" + fileName);
             }
         }
         if (Renderer.commChestBackground == null) {
             String fileName = "CommunityChest.png";
-            if ((Renderer.commChestBackground = importImage("resources/" + fileName) )!= null) {
+            if ((Renderer.commChestBackground = importImage("resources/" + fileName)) != null) {
                 Renderer.commChestBackground = Renderer.commChestBackground.getScaledInstance(85, 85,
-                Image.SCALE_DEFAULT);
+                        Image.SCALE_DEFAULT);
                 System.out.println("Imported resources/" + fileName);
             }
         }
         if (Renderer.freeParkingBackground == null) {
             String fileName = "FreeParking.png";
-            if ((Renderer.freeParkingBackground = importImage("resources/" + fileName) )!= null) {
+            if ((Renderer.freeParkingBackground = importImage("resources/" + fileName)) != null) {
                 Renderer.freeParkingBackground = Renderer.freeParkingBackground.getScaledInstance(85, 85,
-                Image.SCALE_DEFAULT);
+                        Image.SCALE_DEFAULT);
                 System.out.println("Imported resources/" + fileName);
             }
         }
         if (Renderer.goToJailBackground == null) {
             String fileName = "GoToJail.png";
-            if ((Renderer.goToJailBackground = importImage("resources/" + fileName) )!= null) {
+            if ((Renderer.goToJailBackground = importImage("resources/" + fileName)) != null) {
                 Renderer.goToJailBackground = Renderer.goToJailBackground.getScaledInstance(85, 85,
-                Image.SCALE_DEFAULT);
+                        Image.SCALE_DEFAULT);
                 System.out.println("Imported resources/" + fileName);
             }
         }
@@ -953,10 +950,7 @@ public class Renderer extends Thread {
             case CURRENTLY_PLAYING:
                 this.showGame(g2);
                 break;
-            // case GAME_SETUP: (DEPRECATED)
-            // // this.showSetUp(g2);
-            // this.showGame(g2);
-            // break;
+
             case SPLASH_SCREEN:
             default:
                 this.showSplash(g2);

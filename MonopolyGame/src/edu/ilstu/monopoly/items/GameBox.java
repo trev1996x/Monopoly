@@ -3,6 +3,7 @@
  * Date: 20221114
  */
 package edu.ilstu.monopoly.items;
+
 /**
  * A game tile for the Monopoly board
  */
@@ -25,13 +26,6 @@ public class GameBox extends Renderable {
         this.width = this.height = sideSize;
     }
 
-    // @Override
-    // public void render(Graphics2D g2) {
-
-    //     g2.fillRect(this.x, this.y, this.width, this.height);
-
-    // }
-
     @Override
     public void render(Graphics2D g2) {
 
@@ -39,33 +33,29 @@ public class GameBox extends Renderable {
 
         g2.setColor(Color.WHITE);
 
-        g2.setFont(new Font("Arial", Font.BOLD, 12));
+        g2.setFont(new Font("Arial", Font.BOLD, 11));
         FontMetrics fm = g2.getFontMetrics();
 
         int _y = this.y;
-        for(String line : this.label.split("\n"))
-        {
+        for (String line : this.label.split("\n")) {
             Rectangle2D bounds = fm.getStringBounds(line, g2);
             g2.setColor(Color.WHITE);
             g2.drawString(line,
-            this.x + (int)(.5 * this.width - .5 * bounds.getWidth()),
-            _y + fm.getAscent() + (int)(.5 * this.height - .5 * bounds.getHeight()));
-            _y += (int)bounds.getHeight() + 4;
+                    this.x + (int) (.5 * this.width - .5 * bounds.getWidth()),
+                    _y + fm.getAscent() + (int) (.5 * this.height - .5 * bounds.getHeight()));
+            _y += (int) bounds.getHeight() + 4;
         }
     }
 
-    public void setMethod(BiConsumer<GameBox, Player> method)
-    {
+    public void setMethod(BiConsumer<GameBox, Player> method) {
         this.m_landMethod = method;
     }
 
-    public void runMethod(Player player)
-    {
+    public void runMethod(Player player) {
         this.m_landMethod.accept(this, player);
     }
 
-    public boolean hasMethod()
-    {
+    public boolean hasMethod() {
         return this.m_landMethod != null;
     }
 
@@ -79,9 +69,6 @@ public class GameBox extends Renderable {
         Rectangle bounds = this.getBounds();
 
         boolean onX = false, onY = false;
-
-        // System.out.println(bounds);
-        // System.out.println(mousePos);
 
         if ((mousePos.x >= bounds.x) && (mousePos.x <= bounds.x + bounds.width))
             onX = true;
@@ -99,7 +86,7 @@ public class GameBox extends Renderable {
     private int height;
 
     private BiConsumer<GameBox, Player> m_landMethod = null;
-    
+
     public Player owner = null;
     public String label = "Property";
 }

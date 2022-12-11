@@ -40,7 +40,6 @@ public class InstructionsButton extends Renderable {
 		String startStr = "Manual";
 
 		int strWidth = (int) fm.getStringBounds(startStr, g2).getWidth();
-		// int strHeight = (int)fm.getStringBounds(startStr, g2).getHeight();
 
 		if (drawHoverFactor)
 			g2.setColor(Color.RED);
@@ -80,9 +79,6 @@ public class InstructionsButton extends Renderable {
 
 		boolean onX = false, onY = false;
 
-		// System.out.println(bounds);
-		// System.out.println(mousePos);
-
 		if ((mousePos.x >= bounds.x) && (mousePos.x <= bounds.x + bounds.width))
 			onX = true;
 
@@ -101,10 +97,8 @@ public class InstructionsButton extends Renderable {
 	 * @param owner The main window (JFrame)
 	 */
 	public void showInfoBox(JFrame owner) {
-		// if(this.infoBox != null && this.infoBox.isDisplayable()) return;
 
 		this.infoBox = new JDialog(owner, "Instruction Manual");
-
 		this.infoBox.setModal(true);
 		this.infoBox.setAlwaysOnTop(true);
 		this.infoBox.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -145,6 +139,10 @@ public class InstructionsButton extends Renderable {
 				+
 				"You can also choose to end the game at any anytime by selecting the “End Game” button.</html>";
 		JOptionPane instrucOptionPane = new JOptionPane(instructionsString);
+
+		int value = JOptionPane.showConfirmDialog(infoBox,
+				instructionsString, "Instructions", JOptionPane.OK_OPTION);
+
 		this.infoBox.add(instrucOptionPane);
 
 		this.infoBox.setLocationRelativeTo(null);
