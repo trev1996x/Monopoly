@@ -22,6 +22,7 @@ import java.lang.Thread;
 import java.util.Random;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 
@@ -99,6 +100,22 @@ public class Renderer extends Thread {
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
+    }
+
+    public Image importImage(String filename) {
+        File file = new File("./" + filename);
+        
+            try {
+                if(file.exists())
+                    return ImageIO.read(file);
+                else {
+                    InputStream is = getClass().getResourceAsStream("/" + filename);
+                    return ImageIO.read(is);
+                }
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+                return null;
+            }
     }
 
     /**
@@ -845,99 +862,84 @@ public class Renderer extends Thread {
 
         // preload IO
         if (Renderer.boardBackground == null) {
-            try {
-                Renderer.boardBackground = ImageIO.read(new File("resources/background.png")).getScaledInstance(
-                        boxSize * 11, boxSize * 11,
-                        Image.SCALE_DEFAULT);
-                System.out.println("Imported resources/background.png");
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
+            String fileName = "background.png";
+            if ((Renderer.boardBackground = importImage("resources/" + fileName) )!= null) {
+                Renderer.boardBackground = Renderer.boardBackground.getScaledInstance(
+                    boxSize * 11, boxSize * 11,
+                    Image.SCALE_DEFAULT);
+                System.out.println("Imported resources/" + fileName);
             }
         }
         if (Renderer.wattyBackground == null) {
-            try {
-                Renderer.wattyBackground = ImageIO.read(new File("resources/Watty.png")).getScaledInstance(85, 85,
-                        Image.SCALE_DEFAULT);
-                System.out.println("Imported resources/Watty.png");
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
+            String fileName = "Watty.png";
+            if ((Renderer.wattyBackground = importImage("resources/" + fileName) )!= null) {
+                Renderer.wattyBackground = Renderer.wattyBackground.getScaledInstance(85, 85,
+                Image.SCALE_DEFAULT);
+                System.out.println("Imported resources/" + fileName);
             }
         }
         if (Renderer.cardinalBackground == null) {
-            try {
-                Renderer.cardinalBackground = ImageIO.read(new File("resources/CardinalCourt.png")).getScaledInstance(
-                        85, 85,
-                        Image.SCALE_DEFAULT);
-                System.out.println("Imported resources/CardinalCourt.png");
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
+            String fileName = "CardinalCourt.png";
+            if ((Renderer.cardinalBackground = importImage("resources/" + fileName) )!= null) {
+                Renderer.cardinalBackground = Renderer.cardinalBackground.getScaledInstance(85, 85,
+                Image.SCALE_DEFAULT);
+                System.out.println("Imported resources/" + fileName);
             }
         }
         if (Renderer.hewittBackground == null) {
-            try {
-                Renderer.hewittBackground = ImageIO.read(new File("resources/HewittManchester.png")).getScaledInstance(
-                        85, 85,
-                        Image.SCALE_DEFAULT);
-                System.out.println("Imported resources/HewittManchester.png");
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
+            String fileName = "HewittManchester.png";
+            if ((Renderer.hewittBackground = importImage("resources/" + fileName) )!= null) {
+                Renderer.hewittBackground = Renderer.hewittBackground.getScaledInstance(85, 85,
+                Image.SCALE_DEFAULT);
+                System.out.println("Imported resources/" + fileName);
             }
         }
         if (Renderer.triBackground == null) {
-            try {
-                Renderer.triBackground = ImageIO.read(new File("resources/TriTowers.png")).getScaledInstance(85, 85,
-                        Image.SCALE_DEFAULT);
-                System.out.println("Imported resources/TriTowers.png");
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
+            String fileName = "TriTowers.png";
+            if ((Renderer.triBackground = importImage("resources/" + fileName) )!= null) {
+                Renderer.triBackground = Renderer.triBackground.getScaledInstance(85, 85,
+                Image.SCALE_DEFAULT);
+                System.out.println("Imported resources/" + fileName);
             }
         }
         if (Renderer.isupdBackground == null) {
-            try {
-                Renderer.isupdBackground = ImageIO.read(new File("resources/ISUPD.png")).getScaledInstance(85, 85,
-                        Image.SCALE_DEFAULT);
-                System.out.println("Imported resources/ISUPD.png");
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
+            String fileName = "ISUPD.png";
+            if ((Renderer.isupdBackground = importImage("resources/" + fileName) )!= null) {
+                Renderer.isupdBackground = Renderer.isupdBackground.getScaledInstance(85, 85,
+                Image.SCALE_DEFAULT);
+                System.out.println("Imported resources/" + fileName);
             }
         }
         if (Renderer.chanceBackground == null) {
-            try {
-                Renderer.chanceBackground = ImageIO.read(new File("resources/Chance.png")).getScaledInstance(85, 85,
-                        Image.SCALE_DEFAULT);
-                System.out.println("Imported resources/Chance.png");
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
+            String fileName = "Chance.png";
+            if ((Renderer.chanceBackground = importImage("resources/" + fileName) )!= null) {
+                Renderer.chanceBackground = Renderer.chanceBackground.getScaledInstance(85, 85,
+                Image.SCALE_DEFAULT);
+                System.out.println("Imported resources/" + fileName);
             }
         }
         if (Renderer.commChestBackground == null) {
-            try {
-                Renderer.commChestBackground = ImageIO.read(new File("resources/CommunityChest.png")).getScaledInstance(
-                        85, 85,
-                        Image.SCALE_DEFAULT);
-                System.out.println("Imported resources/CommunityChest.png");
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
+            String fileName = "CommunityChest.png";
+            if ((Renderer.commChestBackground = importImage("resources/" + fileName) )!= null) {
+                Renderer.commChestBackground = Renderer.commChestBackground.getScaledInstance(85, 85,
+                Image.SCALE_DEFAULT);
+                System.out.println("Imported resources/" + fileName);
             }
         }
         if (Renderer.freeParkingBackground == null) {
-            try {
-                Renderer.freeParkingBackground = ImageIO.read(new File("resources/FreeParking.png")).getScaledInstance(
-                        85, 85,
-                        Image.SCALE_DEFAULT);
-                System.out.println("Imported resources/FreeParking.png");
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
+            String fileName = "FreeParking.png";
+            if ((Renderer.freeParkingBackground = importImage("resources/" + fileName) )!= null) {
+                Renderer.freeParkingBackground = Renderer.freeParkingBackground.getScaledInstance(85, 85,
+                Image.SCALE_DEFAULT);
+                System.out.println("Imported resources/" + fileName);
             }
         }
-
         if (Renderer.goToJailBackground == null) {
-            try {
-                Renderer.goToJailBackground = ImageIO.read(new File("resources/GoToJail.png")).getScaledInstance(85, 85,
-                        Image.SCALE_DEFAULT);
-                System.out.println("Imported resources/GoToJail.png");
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
+            String fileName = "GoToJail.png";
+            if ((Renderer.goToJailBackground = importImage("resources/" + fileName) )!= null) {
+                Renderer.goToJailBackground = Renderer.goToJailBackground.getScaledInstance(85, 85,
+                Image.SCALE_DEFAULT);
+                System.out.println("Imported resources/" + fileName);
             }
         }
         // ----------
