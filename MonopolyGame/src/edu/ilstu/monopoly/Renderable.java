@@ -15,7 +15,6 @@ public abstract class Renderable implements IRenderable {
 	public Renderable() {
 		this.x = 0;
 		this.y = 0;
-		this.zIndex = 0;
 	}
 
 	public Renderable(int x, int y) {
@@ -59,6 +58,5 @@ public abstract class Renderable implements IRenderable {
 
 	protected int x;
 	protected int y;
-	protected int zIndex; // this is for overlapping elements
 
 }
