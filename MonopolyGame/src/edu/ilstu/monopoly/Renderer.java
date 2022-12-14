@@ -970,10 +970,6 @@ public class Renderer extends Thread {
             case CURRENTLY_PLAYING:
                 this.showGame(g2);
                 break;
-            // case GAME_SETUP: (DEPRECATED)
-            // // this.showSetUp(g2);
-            // this.showGame(g2);
-            // break;
             case SPLASH_SCREEN:
             default:
                 this.showSplash(g2);

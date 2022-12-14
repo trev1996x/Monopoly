@@ -135,10 +135,8 @@ public class InstructionsButton extends Renderable {
 				+
 				"<b>Winning:</b><br />"
 				+
-				"If any player runs out of money, the game will come to an end. The player with the most money is declared the winner.<br /><<br />"
-				+
-				"You can also choose to end the game at any anytime by selecting the “End Game” button.</html>";
-		JOptionPane instrucOptionPane = new JOptionPane(instructionsString);
+				"If any player runs out of money, the game will come to an end. The player with the most money is declared the winner.<br /><br /></html>";
+		JLabel instrucOptionPane = new JLabel(instructionsString);
 		this.infoBox.add(instrucOptionPane);
 
 		this.infoBox.setLocationRelativeTo(null);

@@ -53,7 +53,8 @@ public class Game {
 
 		// 11, 11, 11, 11
 
-		int boxSize = 85, verticalOffset = (int)(((windowHeight - 18) - (11 * boxSize))/2), horizontalOffset = (int)(((windowWidth) - (11 * boxSize))/2);
+		int boxSize = 85, verticalOffset = (int) (((windowHeight - 18) - (11 * boxSize)) / 2),
+				horizontalOffset = (int) (((windowWidth) - (11 * boxSize)) / 2);
 
 		// generate top 11
 		for (int i = 0; i < 11; i++)
@@ -72,8 +73,6 @@ public class Game {
 		// generate left 9
 		for (int i = 31, j = 0; i < 40; i++, j++)
 			renderer.boxes[i] = new GameBox(horizontalOffset, verticalOffset + boxSize * (9 - j), boxSize);
-
-		// for(int i = 0; i < renderer.boxes.length; i++) if(renderer.boxes[i] == null) renderer.boxes[i] = new GameBox(0, 0, 0);
 
 		// pass along variables
 		renderer.verticalOffset = verticalOffset;
