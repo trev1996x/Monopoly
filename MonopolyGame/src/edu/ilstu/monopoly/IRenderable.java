@@ -3,6 +3,7 @@
  * Date: 20221114
  */
 package edu.ilstu.monopoly;
+
 /**
  * Abstract interface for a renderable object
  */
@@ -14,6 +15,7 @@ import java.awt.Rectangle;
 public interface IRenderable {
 	/**
 	 * Set the location of the renderable object
+	 * 
 	 * @param x x coordinate
 	 * @param y y coordinate
 	 */
@@ -21,18 +23,21 @@ public interface IRenderable {
 
 	/**
 	 * Render the renderable object
+	 * 
 	 * @param g2 Graphics2D
 	 */
 	void render(Graphics2D g2);
 
 	/**
 	 * Get the bounds of the object being rendered
+	 * 
 	 * @return Rectangle pertaining to rendered object
 	 */
 	Rectangle getBounds();
 
 	/**
 	 * Check if the mouse is hovering over the renderable object.
+	 * 
 	 * @param mousePos Mouse Position
 	 * @return True/False
 	 */

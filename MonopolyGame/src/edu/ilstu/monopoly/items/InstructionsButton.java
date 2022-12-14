@@ -15,9 +15,8 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JDialog;
-import javax.swing.JOptionPane;
-
 import java.awt.FlowLayout;
 
 import edu.ilstu.monopoly.Renderable;
@@ -40,7 +39,6 @@ public class InstructionsButton extends Renderable {
 		String startStr = "Manual";
 
 		int strWidth = (int) fm.getStringBounds(startStr, g2).getWidth();
-		// int strHeight = (int)fm.getStringBounds(startStr, g2).getHeight();
 
 		if (drawHoverFactor)
 			g2.setColor(Color.RED);
@@ -80,9 +78,6 @@ public class InstructionsButton extends Renderable {
 
 		boolean onX = false, onY = false;
 
-		// System.out.println(bounds);
-		// System.out.println(mousePos);
-
 		if ((mousePos.x >= bounds.x) && (mousePos.x <= bounds.x + bounds.width))
 			onX = true;
 
@@ -101,7 +96,6 @@ public class InstructionsButton extends Renderable {
 	 * @param owner The main window (JFrame)
 	 */
 	public void showInfoBox(JFrame owner) {
-		// if(this.infoBox != null && this.infoBox.isDisplayable()) return;
 
 		this.infoBox = new JDialog(owner, "Instruction Manual");
 
@@ -109,6 +103,7 @@ public class InstructionsButton extends Renderable {
 		this.infoBox.setAlwaysOnTop(true);
 		this.infoBox.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.infoBox.setSize(775, 500);
+		this.infoBox.setResizable(false);
 
 		FlowLayout layout = new FlowLayout();
 		layout.setAlignment(0);
@@ -141,10 +136,8 @@ public class InstructionsButton extends Renderable {
 				+
 				"<b>Winning:</b><br />"
 				+
-				"If any player runs out of money, the game will come to an end. The player with the most money is declared the winner.<br /><<br />"
-				+
-				"You can also choose to end the game at any anytime by selecting the “End Game” button.</html>";
-		JOptionPane instrucOptionPane = new JOptionPane(instructionsString);
+				"If 3 of the 4 players run out of money, the game will come to an end. The player with the most money is declared the winner.<br /><br /></html>";
+		JLabel instrucOptionPane = new JLabel(instructionsString);
 		this.infoBox.add(instrucOptionPane);
 
 		this.infoBox.setLocationRelativeTo(null);

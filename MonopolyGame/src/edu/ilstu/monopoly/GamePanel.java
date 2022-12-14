@@ -3,6 +3,7 @@
  * Date: 20221114
  */
 package edu.ilstu.monopoly;
+
 /**
  * The JPanel that the game will render to
  */
@@ -12,7 +13,6 @@ import java.awt.Point;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.awt.event.*;
-
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel /* implements MouseInputListener */ {
@@ -29,7 +29,7 @@ public class GamePanel extends JPanel /* implements MouseInputListener */ {
 		super.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(e.getButton() == MouseEvent.BUTTON1) {
+				if (e.getButton() == MouseEvent.BUTTON1) {
 					mouseClicked = true;
 				}
 			}
@@ -74,6 +74,7 @@ public class GamePanel extends JPanel /* implements MouseInputListener */ {
 
 	/**
 	 * Check if the mouse was clicked
+	 * 
 	 * @return Mouse clicked
 	 */
 	public boolean getMouseClicked() {

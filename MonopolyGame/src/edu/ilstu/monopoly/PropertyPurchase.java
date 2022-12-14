@@ -1,23 +1,31 @@
 /**
-* @author Ty Qualters, Joel Fangu, Trevor Lemaon
 * ULID: jfangu, tjleamo, tmqualt
-* Class: IT178
-* 2022
+* Date: 20221213
 */
 package edu.ilstu.monopoly;
 
-import edu.ilstu.monopoly.items.GameBox;
-import edu.ilstu.monopoly.items.Player;
+/**
+ * Show the property purchase dialog.
+ */
 
 import javax.swing.*;
 import java.awt.FlowLayout;
 import java.awt.event.*;
 import java.awt.Dimension;
 
+import edu.ilstu.monopoly.items.GameBox;
+import edu.ilstu.monopoly.items.Player;
+
 public class PropertyPurchase {
 
-    private JDialog infoBox;
-
+    /**
+     * Show the property purchase dialog
+     * 
+     * @param owner  The JFrame owner
+     * @param player Player object
+     * @param box    GameBox object
+     * @param price  Price of the property
+     */
     public void showPurchasePropertyDialog(JFrame owner, Player player, GameBox box, int price) {
 
         this.infoBox = new JDialog(owner, "Purchase Property?");
@@ -32,7 +40,7 @@ public class PropertyPurchase {
         JPanel panel2 = new JPanel();
         JPanel panel3 = new JPanel();
 
-        JLabel purchasePropertyQuestion = new JLabel("Purchase " + box.label +  " for $" + price + "?");
+        JLabel purchasePropertyQuestion = new JLabel("Purchase " + box.label + " for $" + price + "?");
         JLabel playerTotal = new JLabel("You currently have $" + player.getMoney() + ".");
         JButton optionYes = new JButton("Yes");
         JButton optionNo = new JButton("No");
@@ -57,7 +65,7 @@ public class PropertyPurchase {
 
         panel1.add(purchasePropertyQuestion);
         this.infoBox.add(panel1);
-        
+
         panel2.add(playerTotal);
         this.infoBox.add(panel2);
 
@@ -76,6 +84,8 @@ public class PropertyPurchase {
         this.infoBox.setVisible(true);
 
     }
-    
+
     public boolean confirmation = false;
+
+    private JDialog infoBox;
 }

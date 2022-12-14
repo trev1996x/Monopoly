@@ -3,6 +3,7 @@
  * Date: 20221114
  */
 package edu.ilstu.monopoly.items;
+
 /**
  * The Dice Roll renderable object
  */
@@ -85,9 +86,6 @@ public class DiceRoll extends Renderable {
 
         boolean onX = false, onY = false;
 
-        // System.out.println(bounds);
-        // System.out.println(mousePos);
-
         if ((mousePos.x >= bounds.x) && (mousePos.x <= bounds.x + bounds.width))
             onX = true;
 
@@ -100,6 +98,9 @@ public class DiceRoll extends Renderable {
         return false;
     }
 
+    /**
+     * Start rolling the dice
+     */
     public void startRoll() {
         if (!was_rolled)
             was_rolled = true;
@@ -108,6 +109,9 @@ public class DiceRoll extends Renderable {
             done_iterating = false;
     }
 
+    /**
+     * Performs dice roll operations
+     */
     public void rollDice() {
         if (done_iterating)
             return;

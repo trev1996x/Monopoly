@@ -24,17 +24,13 @@ public class Player extends Renderable {
         this.identifier = identifier;
     }
 
-    /**
-     * Temporary
-     */
     @Override
     public Rectangle getBounds() {
+        // Empty callable
+        // Not necessary for functions of the game
         return new Rectangle();
     }
 
-    /**
-     * Temporary
-     */
     @Override
     public void render(Graphics2D g2) {
         g2.fillOval(this.owner.getX() + ((int) this.owner.getBounds().getWidth() / 2) - 25,
@@ -51,9 +47,6 @@ public class Player extends Renderable {
                 fm.getDescent() + this.owner.getY() + 45); // hardset value
     }
 
-    /**
-     * Temporary
-     */
     @Override
     public boolean isMouseHovering(Point mousePos) {
         return false;
@@ -76,11 +69,6 @@ public class Player extends Renderable {
     public GameBox getGameBox() {
         return this.owner;
     }
-
-    // private int playerNumber = 0;
-    public static final int MAX_PLAYERS = 4;
-
-    private GameBox owner;
 
     /**
      * Draw the player stats to screen
@@ -152,10 +140,18 @@ public class Player extends Renderable {
                 "Player " + Integer.toString(this.identifier) + " stats: \nMoney: $" + this.money);
     }
 
+    /**
+     * Get the player identifier (#)
+     * 
+     * @return Player number
+     */
     public int getIdentifier() {
         return this.identifier;
     }
 
+    /**
+     * Set the player back to default properties
+     */
     public void reset() {
         this.money = 1_000;
         this.setGameBox(null);
@@ -164,4 +160,8 @@ public class Player extends Renderable {
     private int money = 1_000;
 
     private int identifier = -1;
+
+    public static final int MAX_PLAYERS = 4;
+
+    private GameBox owner;
 }
