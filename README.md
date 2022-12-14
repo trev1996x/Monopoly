@@ -17,3 +17,15 @@ Open up at least one of the Java files (preferably Main.java) and go to "Run and
 Run the "build_as_jar.sh" script.
 
 Use `java -jar ./ISUMonopolyGame.jar` in Terminal or double-click the file in your file browser to run.
+
+---
+
+```
+-------------------------------------------------------------------------------
+Language                     files          blank        comment           code
+-------------------------------------------------------------------------------
+Java                            15            407            497           1547
+-------------------------------------------------------------------------------
+SUM:                            15            407            497           1547
+-------------------------------------------------------------------------------
+```
