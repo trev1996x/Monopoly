@@ -6,8 +6,14 @@ The final project for IT 178.
 
 ### Option 1
 
-Go to **File** in the menu tray, select **Open Workspace from File...** menu option, and then navigate to the *Monopoly* project directory and select *MonopolyGame.code-workspace* to open up the MonopolyGame Java Project with the correct configuration settings.
+Open the "MonopolyGame" directory in VisualStudio Code.
+
+Install the Java development extension pack.
+
+Open up at least one of the Java files (preferably Main.java) and go to "Run and Debug" and select the Green Triangle next to "Launch."
 
 ### Option 2
 
-Open the Monopoly project in VisualStudio Code, then open the *MonopolyGame.code-workspace* file in the editor. When open, click the "Open Workspace" button in the bottom right corner of the editor.
+Run the "build_as_jar.sh" script.
+
+Use `java -jar ./ISUMonopolyGame.jar` in Terminal or double-click the file in your file browser to run.
