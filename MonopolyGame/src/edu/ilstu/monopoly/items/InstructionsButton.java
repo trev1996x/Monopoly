@@ -98,7 +98,6 @@ public class InstructionsButton extends Renderable {
 	public void showInfoBox(JFrame owner) {
 
 		this.infoBox = new JDialog(owner, "Instruction Manual");
-
 		this.infoBox.setModal(true);
 		this.infoBox.setAlwaysOnTop(true);
 		this.infoBox.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -136,8 +135,10 @@ public class InstructionsButton extends Renderable {
 				+
 				"<b>Winning:</b><br />"
 				+
-				"If 3 of the 4 players run out of money, the game will come to an end. The player with the most money is declared the winner.<br /><br /></html>";
-		JLabel instrucOptionPane = new JLabel(instructionsString);
+				"If any player runs out of money, the game will come to an end. The player with the most money is declared the winner.<br /><<br />"
+				+
+				"You can also choose to end the game at any anytime by selecting the “End Game” button.</html>";
+		JOptionPane instrucOptionPane = new JOptionPane(instructionsString);
 		this.infoBox.add(instrucOptionPane);
 
 		this.infoBox.setLocationRelativeTo(null);

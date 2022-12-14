@@ -33,7 +33,7 @@ public class GameBox extends Renderable {
 
         g2.setColor(Color.WHITE);
 
-        g2.setFont(new Font("Arial", Font.BOLD, 12));
+        g2.setFont(new Font("Arial", Font.BOLD, 11));
         FontMetrics fm = g2.getFontMetrics();
 
         // Add in new lines
@@ -48,30 +48,18 @@ public class GameBox extends Renderable {
         }
     }
 
-    /**
-     * Set the callable method.
-     * 
-     * @param method BiConsumer callable
-     */
-    public void setMethod(BiConsumer<GameBox, Player> method) {
+    public void setMethod(BiConsumer<GameBox, Player> method)
+    {
         this.m_landMethod = method;
     }
 
-    /**
-     * Run the method with respect to some player
-     * 
-     * @param player Player object
-     */
-    public void runMethod(Player player) {
+    public void runMethod(Player player)
+    {
         this.m_landMethod.accept(this, player);
     }
 
-    /**
-     * Check if the method exists
-     * 
-     * @return Has method?
-     */
-    public boolean hasMethod() {
+    public boolean hasMethod()
+    {
         return this.m_landMethod != null;
     }
 

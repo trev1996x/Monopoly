@@ -46,14 +46,14 @@ public class Game {
 		this.selectedFrame = this.frontFrame;
 
 		// Initialize the renderer (thread)
-		Renderer renderer = new Renderer();
 		renderer.setGame(this);
 
 		final int windowWidth = this.mainWindow.getWidth(),
 				windowHeight = this.mainWindow.getHeight();
 
-		int boxSize = 85, verticalOffset = (int) (((windowHeight - 18) - (11 * boxSize)) / 2),
-				horizontalOffset = (int) (((windowWidth) - (11 * boxSize)) / 2);
+		// 11, 11, 11, 11
+
+		int boxSize = 85, verticalOffset = (int)(((windowHeight - 18) - (11 * boxSize))/2), horizontalOffset = (int)(((windowWidth) - (11 * boxSize))/2);
 
 		// generate top 11
 		for (int i = 0; i < 11; i++)
@@ -72,6 +72,8 @@ public class Game {
 		// generate left 9
 		for (int i = 31, j = 0; i < 40; i++, j++)
 			renderer.boxes[i] = new GameBox(horizontalOffset, verticalOffset + boxSize * (9 - j), boxSize);
+
+		// for(int i = 0; i < renderer.boxes.length; i++) if(renderer.boxes[i] == null) renderer.boxes[i] = new GameBox(0, 0, 0);
 
 		// pass along variables
 		renderer.verticalOffset = verticalOffset;
@@ -120,6 +122,9 @@ public class Game {
 			this.players.set(i, new Player(i + 1));
 		}
 		this.players.trimToSize(); // Leave this here
+		for (int i = 0; i < renderer.boxes.length; i++) {
+			renderer.boxes[i].owner = null;
+		}
 		java.lang.Runtime.getRuntime().gc(); // Just for the helluvit
 	}
 
@@ -148,4 +153,5 @@ public class Game {
 	}
 
 	protected GameStatus status = GameStatus.SPLASH_SCREEN;
+	private Renderer renderer = new Renderer();
 }
