@@ -312,7 +312,10 @@ public class Renderer extends Thread {
         this.messageBox.setVisible(true);
     }
 
-
+    /**
+     * Generate an action from the community chest
+     * @param player Player object
+     */
     private void communityChest(Player player) {
         // Random class is used to pick a community chest card at random
         Random random = new Random();
@@ -365,10 +368,8 @@ public class Renderer extends Thread {
             player.addMoney(15);
             break;
         case 10:
-            // fallthrough (don't fw dis)
-            // dont put anything here, it goes after default:
+            // fallthrough
         default:
-        // case 10:
             message = "You found $20 on the street.";
             this.showMessageBox(this.gameRef.mainWindow, player, message);
             player.addMoney(20);
@@ -377,7 +378,7 @@ public class Renderer extends Thread {
     }
 
     /**
-     * Roll a card for the Chance space
+     * Generate a card for the Chance space
      * 
      * @param player Player object
      */
@@ -432,10 +433,8 @@ public class Renderer extends Thread {
             player.subMoney(200);
             break;
         case 10:
-            // fallthrough (don't fw dis)
-            // dont put anything here, it goes after default:
+            // fallthrough
         default:
-        // case 10:
             message = "You bought an OnlyFriends subscription. Pay $10 / month.";
             this.showMessageBox(this.gameRef.mainWindow, player, message);
             player.subMoney(10);
@@ -829,8 +828,6 @@ public class Renderer extends Thread {
         if (this.gameRef.currentPlayer != null)
             this.gameRef.currentPlayer.render(g2);
 
-        // g2.drawImage(Renderer.boardBackground, 43, 34, Color.WHITE,
-        // this.gameRef.display.getFocusCycleRootAncestor());
         for(int i = 0; i < this.gameRef.players.size(); i++)
         {
             if(this.gameRef.players.get(i) != null)

@@ -48,16 +48,28 @@ public class GameBox extends Renderable {
         }
     }
 
+    /**
+     * Set the callable method
+     * @param method Callable method
+     */
     public void setMethod(BiConsumer<GameBox, Player> method)
     {
         this.m_landMethod = method;
     }
 
+    /**
+     * Run the method with respect to some player
+     * @param player Player object
+     */
     public void runMethod(Player player)
     {
         this.m_landMethod.accept(this, player);
     }
 
+    /**
+     * Check if a method exists
+     * @return Method exists?
+     */
     public boolean hasMethod()
     {
         return this.m_landMethod != null;

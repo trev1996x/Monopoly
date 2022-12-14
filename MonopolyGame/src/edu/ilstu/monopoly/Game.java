@@ -51,8 +51,6 @@ public class Game {
 		final int windowWidth = this.mainWindow.getWidth(),
 				windowHeight = this.mainWindow.getHeight();
 
-		// 11, 11, 11, 11
-
 		int boxSize = 85, verticalOffset = (int) (((windowHeight - 18) - (11 * boxSize)) / 2),
 				horizontalOffset = (int) (((windowWidth) - (11 * boxSize)) / 2);
 
